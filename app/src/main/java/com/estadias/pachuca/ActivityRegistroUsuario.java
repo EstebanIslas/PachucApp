@@ -35,7 +35,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
 
     ProgressDialog progreso; //Para generar una ventana de carga mienteas se ejecutan las peticiones
 
-    //Permiten establecer la conexion con el webservice
+    /*Permiten establecer la conexion con el webservice*/
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
