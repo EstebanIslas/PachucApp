@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityRegistroUsuario"
+    android:orientation="vertical"
+    android:background="#fff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:gravity="left"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="Regístrate"
+                android:textColor="@color/colorPrimary"
+                android:textSize="23sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Encuentra los mejores lugares de la ciudad."
+                android:gravity="left"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textColor="@color/gris_texto"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="51dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_nombre_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:text="Nombre de Usuario:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_nombre_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:hint="Nombre de usuario"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/gris_texto"
+                    android:textColorHint="@color/gris_texto"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="10sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_correo_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_weight="1"
+                    android:text="Correo:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_correo_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:hint="Correo electrónico"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/gris_texto"
+                    android:textColorHint="@color/gris_texto"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="10sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_password_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_weight="1"
+                    android:text="Contraseña:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_password_registro_usuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="@color/gris_texto"
+                    android:textColorHint="@color/gris_texto"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="10sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_weight="1"
+                    android:text="Confirmar Contraseña:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_confir_password_ru"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:hint="Confirmar contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="@color/gris_texto"
+                    android:textColorHint="@color/gris_texto"
+                    android:textColorLink="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_registrar_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="30sp"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Registrar"
+                android:textColor="#fff"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
