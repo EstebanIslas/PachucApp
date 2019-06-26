@@ -23,16 +23,19 @@ public class ActivityRoll extends AppCompatActivity {
         btn_roll_cliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent roll_cliente = new Intent(getApplicationContext(), ActivityRegistroUsuario.class);//Ayuda a crear fucniones para pasar de una pantalla a otra
-                //reg_empresa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(roll_cliente);
+            Intent roll_cliente = new Intent(getApplicationContext(), ActivityRegistroUsuario.class);//Ayuda a crear fucniones para pasar de una pantalla a otra
+            //reg_empresa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(roll_cliente);
             }
         });
 
         btn_roll_usuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Negocios", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Negocios", Toast.LENGTH_SHORT).show();
+            Intent roll_negocio = new Intent(getApplicationContext(), ActivityRegistroNegocio.class);//Ayuda a crear fucniones para pasar de una pantalla a otra
+            //reg_empresa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(roll_negocio);
             }
         });
 
