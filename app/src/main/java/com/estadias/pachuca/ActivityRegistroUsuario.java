@@ -81,7 +81,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
         if (registro == true) {
                 /*String URL = "http://2428ffab.ngrok.io/Webservice/api_clientes/wsJSONInsertarCliente.php?nombre=" + edt_nombre_registro_usuario.getText().toString()
                         + "&correo=" + edt_correo_registro_usuario.getText().toString() + "&password=" + save_password;*/
-            String URL= "http://eef1cb65.ngrok.io/PachucaService/api_clientes/wsClientesInsert.php";
+            String URL= "http://099c3b98.ngrok.io/PachucaService/api_clientes/wsClientesInsert.php";
 
             /*
              * Se implementa la clase volley directa para este metodo POST
