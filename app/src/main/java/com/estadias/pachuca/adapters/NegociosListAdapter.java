@@ -21,7 +21,8 @@ import com.estadias.pachuca.models.ModelNegocios;
 
 import java.util.List;
 
-public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapter.NegociosHolder> {
+public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapter.NegociosHolder>
+        implements View.OnClickListener{
 
     List<ModelNegocios> listaNegocios; // Lista que llama a ModelNegociosList para traer los campos
 
@@ -32,6 +33,9 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
 
     RequestQueue request;
     Context context; //Se crea el contexto para darle soporte al request
+
+    //Listener
+    private View.OnClickListener listener; //Escuchador
 
     public NegociosListAdapter(List<ModelNegocios> listaNegocios, Context context){
         this.listaNegocios = listaNegocios;
@@ -49,6 +53,8 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
                 ViewGroup.LayoutParams.WRAP_CONTENT); //Ajusta la imagen en el xml
 
         view.setLayoutParams(layoutParams);
+
+        view.setOnClickListener(this); //Se pone a escuchar el OnClick
 
         return new NegociosHolder(view);
     }
@@ -68,7 +74,7 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
     }
 
     private void conexionWSCategorias(String logo, final NegociosHolder negociosHolder) {
-        String URL_imagen = "http://7a940a31.ngrok.io/PachucaService/api_usuarios/"+logo;
+        String URL_imagen = "http://7e5ecf67.ngrok.io/PachucaService/api_usuarios/"+logo;
         URL_imagen = URL_imagen.replace(" ", "%20"); //En caso de que exista un espacio
 
         ImageRequest imageRequest = new ImageRequest(URL_imagen, new Response.Listener<Bitmap>() {
@@ -106,6 +112,17 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
             tv_descripcion_negocio_lista_cat = itemView.findViewById(R.id.tv_descripcion_negocio_lista_cat);
             imv_logo_negocios_list = itemView.findViewById(R.id.imv_logo_negocios_list);
 
+        }
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (listener != null){
+            listener.onClick(view);
         }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -63,6 +64,8 @@ public class FragmentListaNegocios extends Fragment implements Response.Listener
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
+    //Variable para el onClickListener
+    public static final String ID_NEGOCIO = "1";
 
     public FragmentListaNegocios() {
         // Required empty public constructor
@@ -122,7 +125,7 @@ public class FragmentListaNegocios extends Fragment implements Response.Listener
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String URL = "http://7a940a31.ngrok.io/PachucaService/api_usuarios/wsConsultarUsuariosCategoria.php?categoria="+nombre_categoria.toString();
+        String URL = "http://7e5ecf67.ngrok.io/PachucaService/api_usuarios/wsConsultarUsuariosCategoria.php?categoria="+nombre_categoria.toString();
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null, this, this); //Procesa la informacion del Json
 
@@ -158,6 +161,35 @@ public class FragmentListaNegocios extends Fragment implements Response.Listener
             //Mostrar la informacion en el RecyclerView por medio del Adapter
             progreso.hide();
             NegociosListAdapter adapter = new NegociosListAdapter(listaNegocios, getContext());
+
+            adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String id = listaNegocios.get(id_recycler_img_negocios.getChildAdapterPosition(view)).getId().toString();
+                    String id_negocio = id;
+
+                    //Toast.makeText(getContext(), "Seleccion: "+ id_negocio, Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
+                    bundle.putString(ID_NEGOCIO, id_negocio);
+                    //Toast.makeText(getContext(), bundle.toString()+ " " + NOMBRE_NEGOCIO, Toast.LENGTH_SHORT).show();
+
+                    //Enviar de un fragment a otro
+                    Fragment consultarNegocio = new FragmentConsultarNegocio(); //Objeto que llama al fragment que se le enviaran los datos
+                    consultarNegocio.setArguments(bundle); //Se envia como parametro el valor guardado
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
+                    ft.replace(R.id.content_main, consultarNegocio); //se mapea el id del lugar donde de remplazara
+
+                    /* No cierra el fragment anterior*/
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    ft.addToBackStack(null);
+
+                    ft.commit();
+                }
+            });
+
+
             id_recycler_img_negocios.setAdapter(adapter);
 
         }  catch (JSONException e) {
