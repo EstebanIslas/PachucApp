@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#f5f5f5"
+        android:layout_marginTop="5sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp">
+
+        <LinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/imv_logo_negocios_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10sp">
+
+            <TextView
+                android:id="@+id/tv_nombre_negocio_lista_cat"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#424242"/>
+
+
+            <TextView
+                android:id="@+id/tv_descripcion_negocio_lista_cat"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="7sp"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Descripcion"
+                android:textColor="@color/gris_texto"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f5f5f5"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"/>
+
+</LinearLayout>
