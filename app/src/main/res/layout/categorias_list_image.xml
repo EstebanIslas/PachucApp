@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#f5f5f5"
+        android:layout_marginTop="5sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="10sp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imv_logo_categoria_list_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="2sp"
+                android:id="@+id/tv_nombre_categoria_list_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#424242"
+                />
+
+            <TextView
+                android:id="@+id/tv_descripcion_categoria_list_img"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Descripcion"
+                android:textColor="@color/gris_texto"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gris_texto"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"/>
+
+</LinearLayout>

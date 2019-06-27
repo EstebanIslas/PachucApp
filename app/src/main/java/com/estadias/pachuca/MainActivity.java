@@ -1,8 +1,10 @@
 package com.estadias.pachuca;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.estadias.pachuca.fragments.FragmentListaCategorias;
+import com.estadias.pachuca.interfaces.IFragments;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , IFragments {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +77,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment miFragment = null;
+        boolean fragmentseleccionado = false;
+
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_categorias) {
+
+            miFragment = new FragmentListaCategorias(); //Instanciamos el objeto de tipo fragmet a ListaCategorias
+            fragmentseleccionado = true;
 
         } /*else if (id == R.id.nav_slideshow) {
 
@@ -87,8 +98,18 @@ public class MainActivity extends AppCompatActivity
 
         }*/
 
+         //Si el fragment seleccionado es verdadero reemplaza el contenido de content main por su id
+         if (fragmentseleccionado == true){
+             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFragment).commit(); //Remplaza el fragment seleccionado
+         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
