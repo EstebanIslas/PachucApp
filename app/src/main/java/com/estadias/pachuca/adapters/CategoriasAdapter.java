@@ -21,7 +21,8 @@ import com.estadias.pachuca.models.ModelCategorias;
 
 import java.util.List;
 
-public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.CategoriasHolder> {
+public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.CategoriasHolder>
+        implements View.OnClickListener{
 
     List<ModelCategorias> listaCategorias; // Lista que llama a la ModelCategorias para traer los campos
 
@@ -32,6 +33,10 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
 
     RequestQueue request;
     Context context; //Se crea el contexto para darle soporte al request
+
+    //Implementar Onclick
+    private View.OnClickListener listener; //Escuchador
+
 
     public CategoriasAdapter(List<ModelCategorias> listaCategorias, Context context){
         this.listaCategorias = listaCategorias;
@@ -50,6 +55,8 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
                 ViewGroup.LayoutParams.WRAP_CONTENT); //Ajusta la imagen en el xml
 
         view.setLayoutParams(layoutParams);
+
+        view.setOnClickListener(this); //Se pone a escuchar el evento Listener
 
         return new CategoriasHolder(view);
     }
@@ -93,6 +100,8 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
         return listaCategorias.size(); //Cuenta el tamaño de la lista
     }
 
+
+
     public class CategoriasHolder extends RecyclerView.ViewHolder{
 
         TextView tv_nombre_categoria_list_img;
@@ -106,6 +115,17 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
             tv_nombre_categoria_list_img = itemView.findViewById(R.id.tv_nombre_categoria_list_img);
             tv_descripcion_categoria_list_img = itemView.findViewById(R.id.tv_descripcion_categoria_list_img);
             imv_logo_categoria_list_img = itemView.findViewById(R.id.imv_logo_categoria_list_img);
+        }
+    }
+
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (listener != null){
+            listener.onClick(view);
         }
     }
 }

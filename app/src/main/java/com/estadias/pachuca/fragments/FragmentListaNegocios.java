@@ -108,17 +108,21 @@ public class FragmentListaNegocios extends Fragment implements Response.Listener
 
         request = Volley.newRequestQueue(getContext()); //Referenciar
 
-        conexionWebService();
+        //Envio de parametro del otro fragment ListaCategorias
+        Bundle bundle = this.getArguments();
+        String nombre_categoria = bundle.get(FragmentListaCategorias.NOMBRE_NEGOCIO).toString();
+
+        conexionWebService(nombre_categoria);
 
         return view;
     }
 
-    private void conexionWebService() {
+    private void conexionWebService(String nombre_categoria) {
         progreso = new ProgressDialog(getContext());
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String URL = "http://7a940a31.ngrok.io/PachucaService/api_usuarios/wsConsultarUsuariosCategoria.php?categoria=Hoteles";
+        String URL = "http://7a940a31.ngrok.io/PachucaService/api_usuarios/wsConsultarUsuariosCategoria.php?categoria="+nombre_categoria.toString();
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null, this, this); //Procesa la informacion del Json
 

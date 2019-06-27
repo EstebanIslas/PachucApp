@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -61,6 +62,8 @@ public class FragmentListaCategorias extends Fragment implements Response.Listen
     JsonObjectRequest jsonObjectRequest;
 
 
+    //Variable para el onClickListener
+    public static final String NOMBRE_NEGOCIO = "Comercio";
 
     public FragmentListaCategorias() {
         // Required empty public constructor
@@ -152,6 +155,36 @@ public class FragmentListaCategorias extends Fragment implements Response.Listen
           //Mostrar la informacion en el RecyclerView por medio del Adapter
             progreso.hide();
             CategoriasAdapter adapter = new CategoriasAdapter(listaCategorias, getContext());
+
+            //Insercion de OnCLick para ingresar a lista de negocios
+
+            adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String nombre_negocio = listaCategorias.get(id_recycler_img_categorias.getChildAdapterPosition(view)).getNombre().toString();
+                    String nombre = nombre_negocio;
+                    //Toast.makeText(getContext(), "Seleccion: "+ nombre, Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
+                    bundle.putString(NOMBRE_NEGOCIO, nombre);
+                    //Toast.makeText(getContext(), bundle.toString()+ " " + NOMBRE_NEGOCIO, Toast.LENGTH_SHORT).show();
+
+                    //Enviar de un fragmento a otro
+                    Fragment listanegocios = new FragmentListaNegocios(); //Objeto que llama al fragment que se le enviaran los datos
+                    listanegocios.setArguments(bundle); //Se envia como parametro el valor guardado
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
+                    ft.replace(R.id.content_main,listanegocios); //se mapea el id del lugar donde de remplazara
+
+                    /* No cierra el fragment anterior*/
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    ft.addToBackStack(null);
+
+                    ft.commit();
+                }
+            });
+
             id_recycler_img_categorias.setAdapter(adapter);
 
 
