@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.estadias.pachuca.models.ModelClientes;
+import com.estadias.pachuca.models.ModelLogin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +83,7 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
 
         String password = ActivityLogin.md5(edt_password_login.getText().toString());
 
-        String URL = "http://7e5ecf67.ngrok.io/PachucaService/api_clientes/wsClientesLogin.php?correo=" + edt_correo_login.getText().toString() +
+        String URL = "http://8e17653e.ngrok.io/PachucaService/api_login/wsLogin.php?correo=" + edt_correo_login.getText().toString() +
                 "&password=" + password;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,this,this);
@@ -96,20 +97,13 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
         //Toast.makeText(this, "Mensaje: "+ response, Toast.LENGTH_SHORT).show();
 
         //Traemos la clase ModelCliente para guardar lo que retorna el Json
-        ModelClientes miCliente = new ModelClientes();
-
-
-        //Variables en las que se guardara el resultado Json
-        /*int id_cliente = 0;
-        String nombre;
-        String correo = "";
-        String password = "";*/
+        ModelLogin login = new ModelLogin();
 
         //Variables para validar usuario
 
-        String valid_correo, valid_password, nueva_password;
+        String valid_correo, valid_password, nueva_password, rol;
 
-        JSONArray json = response.optJSONArray("clientes"); // Busca el arreglo y como parametro el nombre del arreglo Json
+        JSONArray json = response.optJSONArray("login"); // Busca el arreglo y como parametro el nombre del arreglo Json
 
         JSONObject jsonObject = null;
 
@@ -117,43 +111,49 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
 
             jsonObject= json.getJSONObject(0);
             //Agrega el json a las variables
-            miCliente.setId_cliente(jsonObject.optInt("id_cliente"));
-            miCliente.setNombre(jsonObject.optString("nombre"));
-            miCliente.setCorreo(jsonObject.optString("correo"));
-            miCliente.setPassword(jsonObject.optString("password"));
+            login.setId(jsonObject.optInt("id"));
+            login.setCorreo(jsonObject.optString("correo"));
+            login.setPassword(jsonObject.optString("password"));
+            login.setRol(jsonObject.optString("rol"));
 
         }catch(JSONException err){
             err.printStackTrace();
         }
 
         //Se agregan a las variables de validacion para hacer el proceso de logueo
-        valid_correo = miCliente.getCorreo();
-        valid_password = miCliente.getPassword();
+        valid_correo = login.getCorreo();
+        valid_password = login.getPassword();
         nueva_password = edt_password_login.getText().toString();
+        rol = login.getRol();
 
         boolean comparar = passwordMD5(valid_password, nueva_password);
 
         //Toast.makeText(this, "Mensaje: "+ comparar + valid_password, Toast.LENGTH_SHORT).show();
 
-        if (valid_correo.equals(edt_correo_login.getText().toString()) && comparar == true){
-            Toast.makeText(this, "Bienvenido!!", Toast.LENGTH_SHORT).show();
+        if (valid_correo.equals(edt_correo_login.getText().toString()) && comparar == true){ //Compara el metodo password md5 que recibe como parametros el password y un boolean
 
-            //Envia el id para usarlo en otro fragment
+            if (rol.equals("cliente")) { //Enviar a su respectivo Drawer segun sea el rol
 
-            String id_client = Integer.toString(miCliente.getId_cliente());
+                Toast.makeText(this, "Bienvenido!!", Toast.LENGTH_SHORT).show();
 
-            //Enviar variable
+                String id_client = Integer.toString(login.getId());//Envia el id para usarlo en otro fragment
 
-            Bundle bundle = new Bundle();
-            bundle.putString(ID_CLIENTE, id_client);
+                //Enviar variable
 
-            Toast.makeText(this, bundle.toString() + " " + ID_CLIENTE, Toast.LENGTH_SHORT).show(); //Saber si si se esta enviando
+                Bundle bundle = new Bundle();
+                bundle.putString(ID_CLIENTE, id_client);
+
+                Toast.makeText(this, bundle.toString() + " " + ID_CLIENTE, Toast.LENGTH_SHORT).show(); //Saber si si se esta enviando
 
 
-            //Envia a la otra actividad
-            Intent main_activity = new Intent(this, MainActivity.class);//Ayuda a crear funciones para pasar de una pantalla a otra
-            main_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(main_activity);
+                //Envia a la otra actividad
+                Intent main_activity = new Intent(this, MainActivity.class);//Ayuda a crear funciones para pasar de una pantalla a otra
+                main_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(main_activity);
+            } else if (rol.equals("user")){
+
+                Toast.makeText(this, "Usted es negocio!!", Toast.LENGTH_SHORT).show();
+            }
 
         }else{
             Toast.makeText(this, "El usuario o contraseña no coinciden!!", Toast.LENGTH_SHORT).show();
