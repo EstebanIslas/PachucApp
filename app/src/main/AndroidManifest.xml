@@ -11,11 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityRegistroNegocio"></activity>
+        <!-- Actividades -->
+
+        <activity
+            android:name=".ActivityRegistroNegocio"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ActivityRoll"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- Actividades -->
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityRegistroUsuario"
             android:screenOrientation="portrait"
