@@ -74,7 +74,7 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
     }
 
     private void conexionWSCategorias(String logo, final NegociosHolder negociosHolder) {
-        String URL_imagen = "http://b4bb7d64.ngrok.io/PachucaService/api_usuarios/"+logo;
+        String URL_imagen = "http://953b1052.ngrok.io/PachucaService/api_usuarios/"+logo;
         URL_imagen = URL_imagen.replace(" ", "%20"); //En caso de que exista un espacio
 
         ImageRequest imageRequest = new ImageRequest(URL_imagen, new Response.Listener<Bitmap>() {

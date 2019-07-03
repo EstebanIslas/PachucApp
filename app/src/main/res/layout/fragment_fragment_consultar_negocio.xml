@@ -19,11 +19,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="120dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginTop="8sp">
+                android:background="@color/gris_background"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
 
                 <ImageView
                     android:id="@+id/imv_logo_consulta_neg"
@@ -33,14 +37,20 @@
             </LinearLayout>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gris_lineas"/>
+
+            <TextView
                 android:id="@+id/tv_nombre_consulta_neg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mukta_vaani_extralight"
                 android:gravity="center"
                 android:text="Nombre"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="19sp"
                 android:layout_marginTop="15sp"/>
 
             <LinearLayout
@@ -77,44 +87,10 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_calle_consulta_neg"
+                    android:id="@+id/tv_dir_completa_consulta_neg"
                     android:text="Calle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gris_texto"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/mukta_vaani_extralight"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_colonia_consulta_neg"
-                    android:text="Colonia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gris_texto"
-                    android:fontFamily="@font/mukta_vaani_extralight"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_numero_consulta_neg"
-                    android:text="Numero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gris_texto"
-                    android:fontFamily="@font/mukta_vaani_extralight"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_municipio_consulta_neg"
-                    android:text="Municipio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="55dp"
                     android:textColor="@color/gris_texto"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/mukta_vaani_extralight"

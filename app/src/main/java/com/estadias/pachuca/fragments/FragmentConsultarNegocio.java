@@ -53,11 +53,11 @@ public class FragmentConsultarNegocio extends Fragment {
 
     TextView tv_nombre_consulta_neg;
     TextView tv_descripcion_consulta_neg;
-    TextView tv_calle_consulta_neg, tv_colonia_consulta_neg, tv_numero_consulta_neg, tv_municipio_consulta_neg;
     TextView tv_telefono_consulta_neg;
     TextView tv_ubicacion__consulta_neg;
     TextView tv_correo_consulta_neg;
     TextView tv_sitio_web_consulta_neg;
+    TextView tv_dir_completa_consulta_neg;
     ImageView imv_logo_consulta_neg;
 
     ProgressDialog progreso; //Para generar una ventana de carga mientras se ejecutan las peticiones
@@ -119,15 +119,13 @@ public class FragmentConsultarNegocio extends Fragment {
     private void initComponents(View view) {
         tv_nombre_consulta_neg = view.findViewById(R.id.tv_nombre_consulta_neg);
         tv_descripcion_consulta_neg = view.findViewById(R.id.tv_descripcion_consulta_neg);
-        tv_calle_consulta_neg = view.findViewById(R.id.tv_calle_consulta_neg);
-        tv_colonia_consulta_neg = view.findViewById(R.id.tv_colonia_consulta_neg);
-        tv_numero_consulta_neg = view.findViewById(R.id.tv_numero_consulta_neg);
-        tv_municipio_consulta_neg = view.findViewById(R.id.tv_municipio_consulta_neg);
         tv_telefono_consulta_neg = view.findViewById(R.id.tv_telefono1_consulta_neg);
         tv_ubicacion__consulta_neg = view.findViewById(R.id.tv_ubicacion_consulta_neg);
         tv_correo_consulta_neg = view.findViewById(R.id.tv_correo_consulta_neg);
         tv_sitio_web_consulta_neg = view.findViewById(R.id.tv_sitio_web_consulta_neg);
         imv_logo_consulta_neg = view.findViewById(R.id.imv_logo_consulta_neg);
+
+        tv_dir_completa_consulta_neg = view.findViewById(R.id.tv_dir_completa_consulta_neg);
     }
 
 
@@ -137,7 +135,7 @@ public class FragmentConsultarNegocio extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://b4bb7d64.ngrok.io/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
+        String URL = "http://953b1052.ngrok.io/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -174,22 +172,20 @@ public class FragmentConsultarNegocio extends Fragment {
                     Toast.makeText(getContext(), "No se establecio la conexion: " +e.toString(), Toast.LENGTH_SHORT).show();
                     progreso.hide();
                 }
+                String direccion = "Calle "+ negocios.getCalle()+ " No. "+ negocios.getNumero() + " Colonia " + negocios.getColonia() + ", " + negocios.getMunicipio();
 
                 tv_nombre_consulta_neg.setText(negocios.getNombre());
                 tv_descripcion_consulta_neg.setText(negocios.getDescripcion());
-                tv_calle_consulta_neg.setText(negocios.getCalle());
-                tv_colonia_consulta_neg.setText(negocios.getColonia());
-                tv_numero_consulta_neg.setText(negocios.getNumero());
-                tv_municipio_consulta_neg.setText(negocios.getMunicipio());
                 tv_telefono_consulta_neg.setText(negocios.getTelefono1());
                 tv_ubicacion__consulta_neg.setText(negocios.getMaps_url());
                 tv_correo_consulta_neg.setText(negocios.getCorreo());
                 tv_sitio_web_consulta_neg.setText(negocios.getSitio_web());
+                tv_dir_completa_consulta_neg.setText(direccion);
 
                 /*
                  * Logica para cargar imagen desde WS por URL
                  */
-                String logo_url = "http://b4bb7d64.ngrok.io/PachucaService/api_usuarios/" + negocios.getLogo();
+                String logo_url = "http://953b1052.ngrok.io/PachucaService/api_usuarios/" + negocios.getLogo();
 
                 conexionWebServiceLogoUrl(logo_url);
 

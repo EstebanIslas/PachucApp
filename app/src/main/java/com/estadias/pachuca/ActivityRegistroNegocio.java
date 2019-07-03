@@ -152,7 +152,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
 
 
             //Url para metodo POST
-            String URL = "http://8e17653e.ngrok.io/PachucaService/api_usuarios/wsInsertarUsuarios.php";
+            String URL = "http://953b1052.ngrok.io/PachucaService/api_usuarios/wsInsertarUsuarios.php";
 
             Toast.makeText(this, "Esto puede tardar unos minutos", Toast.LENGTH_SHORT).show();
 
