@@ -2,6 +2,7 @@ package com.estadias.pachuca.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +61,10 @@ public class FragmentConsultarNegocio extends Fragment {
     TextView tv_sitio_web_consulta_neg;
     TextView tv_dir_completa_consulta_neg;
     ImageView imv_logo_consulta_neg;
+
+    //Boton de llamada y mensaje
+    Button btn_llamar;
+    Button btn_mensaje;
 
     ProgressDialog progreso; //Para generar una ventana de carga mientras se ejecutan las peticiones
 
@@ -113,7 +119,36 @@ public class FragmentConsultarNegocio extends Fragment {
 
         conexionWebService(id_negocio);
 
+        btn_llamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llamarOnClick(view);
+            }
+        });
+
+        btn_mensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mensajeOnClick(view);
+            }
+        });
+
         return view;
+    }
+
+    private void mensajeOnClick(View view) {
+        Uri mensaje = Uri.parse("smsto:"+ tv_telefono_consulta_neg.getText().toString());
+        Intent smsIntent = new Intent(Intent.ACTION_SENDTO, mensaje);
+        smsIntent.putExtra("sms_body", "");
+
+        startActivity(smsIntent);
+    }
+
+    private void llamarOnClick(View view) {
+        Uri numero = Uri.parse("tel:"+tv_telefono_consulta_neg.getText().toString());
+        Intent callIntent = new Intent(Intent.ACTION_DIAL, numero);
+
+        startActivity(callIntent);
     }
 
     private void initComponents(View view) {
@@ -126,6 +161,10 @@ public class FragmentConsultarNegocio extends Fragment {
         imv_logo_consulta_neg = view.findViewById(R.id.imv_logo_consulta_neg);
 
         tv_dir_completa_consulta_neg = view.findViewById(R.id.tv_dir_completa_consulta_neg);
+
+        //Boton de Llamada y mensaje
+        btn_llamar = view.findViewById(R.id.btn_llamar_consulta);
+        btn_mensaje = view.findViewById(R.id.btn_mensaje_consulta);
     }
 
 
