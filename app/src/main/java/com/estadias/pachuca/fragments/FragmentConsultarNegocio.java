@@ -174,7 +174,7 @@ public class FragmentConsultarNegocio extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://953b1052.ngrok.io/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
+        String URL = "http://b9f9a392.ngrok.io/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -224,7 +224,7 @@ public class FragmentConsultarNegocio extends Fragment {
                 /*
                  * Logica para cargar imagen desde WS por URL
                  */
-                String logo_url = "http://953b1052.ngrok.io/PachucaService/api_usuarios/" + negocios.getLogo();
+                String logo_url = "http://b9f9a392.ngrok.io/PachucaService/api_usuarios/" + negocios.getLogo();
 
                 conexionWebServiceLogoUrl(logo_url);
 
