@@ -1,5 +1,6 @@
 package com.estadias.pachuca;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -94,6 +95,14 @@ public class MainActivity extends AppCompatActivity
         } */else if (id == R.id.nav_profile) {
 
             Toast.makeText(this, "Selección Perfil", Toast.LENGTH_SHORT).show();
+
+            //Recibir variable de la clase login
+            Intent intent = getIntent(); //Objet de tipo intent que recupera la variable
+            String id_guardado = intent.getStringExtra(ActivityLogin.ID_CLIENTE); ////Almacenar el id del cliente de la actividad Login
+
+            Toast.makeText(this, "Usted tiene de ID: " + id_guardado, Toast.LENGTH_SHORT).show();
+
+
         } /*else if (id == R.id.nav_send) {
 
         }*/

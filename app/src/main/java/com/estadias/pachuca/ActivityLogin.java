@@ -1,5 +1,6 @@
 package com.estadias.pachuca;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -83,7 +84,7 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
 
         String password = ActivityLogin.md5(edt_password_login.getText().toString());
 
-        String URL = "http://b9f9a392.ngrok.io/PachucaService/api_login/wsLogin.php?correo=" + edt_correo_login.getText().toString() +
+        String URL = "http://dbb0189d.ngrok.io/PachucaService/api_login/wsLogin.php?correo=" + edt_correo_login.getText().toString() +
                 "&password=" + password;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,this,this);
@@ -138,17 +139,12 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
 
                 String id_client = Integer.toString(login.getId());//Envia el id para usarlo en otro fragment
 
-                //Enviar variable
-
-                Bundle bundle = new Bundle();
-                bundle.putString(ID_CLIENTE, id_client);
-
-                Toast.makeText(this, bundle.toString() + " " + ID_CLIENTE, Toast.LENGTH_SHORT).show(); //Saber si si se esta enviando
-
-
                 //Envia a la otra actividad
                 Intent main_activity = new Intent(this, MainActivity.class);//Ayuda a crear funciones para pasar de una pantalla a otra
-                main_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                main_activity.putExtra(ID_CLIENTE, id_client); //Enviar variable
+
+                main_activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Para que desaparezca la otra actividad anterior en este caso ActivityLogin
                 startActivity(main_activity);
             } else if (rol.equals("user")){
 
