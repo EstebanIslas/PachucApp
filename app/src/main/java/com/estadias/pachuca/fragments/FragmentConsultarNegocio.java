@@ -150,7 +150,7 @@ public class FragmentConsultarNegocio extends Fragment {
     }
 
     private void irapromocionesOnClick(View view, String id_negocio) {
-        Toast.makeText(getContext(), "Presiono promociones y el id del negocio es: "+ id_negocio, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Presiono promociones y el id del negocio es: "+ id_negocio, Toast.LENGTH_SHORT).show();
 
         Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
         bundle.putString(ID_NEGOCIO_FIN, id_negocio);
@@ -158,6 +158,8 @@ public class FragmentConsultarNegocio extends Fragment {
         //Enviar de un fragment a otro
         Fragment consultarPromociones = new FragmentConsultarPromociones(); //Objeto que llama al fragment que se le enviaran los datos
         consultarPromociones.setArguments(bundle); //Se envia como parametro el valor guardado*/
+
+        //Toast.makeText(getContext(), "ID: " + bundle.toString(), Toast.LENGTH_SHORT).show();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
         ft.replace(R.id.content_main, consultarPromociones); //se mapea el id del lugar donde de remplazara
