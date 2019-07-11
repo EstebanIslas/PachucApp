@@ -119,7 +119,7 @@ public class FragmentListaCategorias extends Fragment implements Response.Listen
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String URL = "http://dbb0189d.ngrok.io/PachucaService/api_categorias/wsGetAllCategorias.php";
+        String URL = "http://34a82a4f.ngrok.io/PachucaService/api_categorias/wsGetAllCategorias.php";
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null, this, this); //Procesa la informacion del Json
 
