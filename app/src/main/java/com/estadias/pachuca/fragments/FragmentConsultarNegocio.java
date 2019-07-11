@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,8 @@ public class FragmentConsultarNegocio extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    //Variable final
+    public static final String ID_NEGOCIO_FIN = "1";
 
     //########### Insercion de Variables ###########
 
@@ -65,6 +68,9 @@ public class FragmentConsultarNegocio extends Fragment {
     //Boton de llamada y mensaje
     Button btn_llamar;
     Button btn_mensaje;
+
+    //Boton de promociones
+    Button btn_promociones_consulta_neg;
 
     ProgressDialog progreso; //Para generar una ventana de carga mientras se ejecutan las peticiones
 
@@ -115,7 +121,7 @@ public class FragmentConsultarNegocio extends Fragment {
 
         //Envio de parametro del otro fragment ListaCategorias
         Bundle bundle = this.getArguments();
-        String id_negocio = bundle.get(FragmentListaNegocios.ID_NEGOCIO).toString();
+        final String id_negocio = bundle.get(FragmentListaNegocios.ID_NEGOCIO).toString();
 
         conexionWebService(id_negocio);
 
@@ -133,7 +139,34 @@ public class FragmentConsultarNegocio extends Fragment {
             }
         });
 
+        btn_promociones_consulta_neg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                irapromocionesOnClick(view, id_negocio);
+            }
+        });
+
         return view;
+    }
+
+    private void irapromocionesOnClick(View view, String id_negocio) {
+        Toast.makeText(getContext(), "Presiono promociones y el id del negocio es: "+ id_negocio, Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
+        bundle.putString(ID_NEGOCIO_FIN, id_negocio);
+
+        //Enviar de un fragment a otro
+        Fragment consultarPromociones = new FragmentConsultarPromociones(); //Objeto que llama al fragment que se le enviaran los datos
+        consultarPromociones.setArguments(bundle); //Se envia como parametro el valor guardado*/
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
+        ft.replace(R.id.content_main, consultarPromociones); //se mapea el id del lugar donde de remplazara
+
+        /* No cierra el fragment anterior*/
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack(null);
+
+        ft.commit();
     }
 
     private void mensajeOnClick(View view) {
@@ -165,6 +198,9 @@ public class FragmentConsultarNegocio extends Fragment {
         //Boton de Llamada y mensaje
         btn_llamar = view.findViewById(R.id.btn_llamar_consulta);
         btn_mensaje = view.findViewById(R.id.btn_mensaje_consulta);
+
+        //Boton de Promociones
+        btn_promociones_consulta_neg = view.findViewById(R.id.btn_promociones_consulta_neg);
     }
 
 
