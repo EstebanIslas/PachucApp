@@ -118,7 +118,7 @@ public class FragmentConsultarPromociones extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://34a82a4f.ngrok.io/PachucaService/api_promociones/wsConsultarPromociones.php?id=" + id_negocio;
+        String URL = "http://376d089f.ngrok.io/PachucaService/api_promociones/wsConsultarPromociones.php?id=" + id_negocio;
 
         //new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
 
@@ -129,6 +129,7 @@ public class FragmentConsultarPromociones extends Fragment {
 
                 //Mapear lo que devuelve el Webservice
                 ModelPromociones promociones = new ModelPromociones();
+
 
                 JSONArray json = response.optJSONArray("promocion"); //Separa el array que muestra el json -> "[promocion:"
 
