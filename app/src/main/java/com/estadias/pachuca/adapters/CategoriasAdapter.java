@@ -76,7 +76,7 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
     }
 
     private void conexionWSCategorias(String logo, final CategoriasHolder categoriasHolder) {
-        String URL_imagen = "http://376d089f.ngrok.io/PachucaService/api_categorias/" + logo;
+        String URL_imagen = "http://192.168.1.73/PachucaService/api_categorias/" + logo;
         URL_imagen = URL_imagen.replace(" ", "%20"); //En caso de que el nombre de la imagen tenga espacios
 
         ImageRequest imageRequest = new ImageRequest(URL_imagen, new Response.Listener<Bitmap>() {
