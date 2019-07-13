@@ -63,6 +63,20 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
 
+        <Button
+            android:id="@+id/btn_generar_codigo_promociones"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30sp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Generar Código"
+            android:textColor="#fff"
+            android:textSize="13dp" />
+
 
 
     </LinearLayout>
