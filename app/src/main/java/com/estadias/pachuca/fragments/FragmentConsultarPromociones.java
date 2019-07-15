@@ -3,6 +3,7 @@ package com.estadias.pachuca.fragments;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,12 +55,18 @@ public class FragmentConsultarPromociones extends Fragment {
 
     TextView tv_titulo_promociones;
     TextView tv_descripcion;
+    //tv para mostrar codigo
+    TextView tv_codigo_promociones;
 
     //Boton para generar codigo de promocion
     Button btn_generar_codigo_promociones;
     public static String ID_PROMO = "";
     public static String RESPUESTA = "";
     public static String ID_CODIGO = "";
+    public static String CODIGO = "";
+    public static String ID_CLIENTE = "0";
+    public static String ID_CLIENTE_FINAL = "";
+
 
     ProgressDialog progreso; //Para generar una ventana de carga mientras se ejecutan las peticiones
 
@@ -115,6 +122,13 @@ public class FragmentConsultarPromociones extends Fragment {
         Bundle bundle = this.getArguments();
         final String id_negocio = bundle.get(FragmentConsultarNegocio.ID_NEGOCIO_FIN).toString(); //Id de negocio para consulta de promociones
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("ID_CLIENTE", Context.MODE_PRIVATE);
+
+        String id_clientes = preferences.getString(ID_CLIENTE, ID_CLIENTE);
+        ID_CLIENTE_FINAL = id_clientes;
+
+        //Toast.makeText(getContext(), "ID_CLIENTE: " + id_clientes, Toast.LENGTH_SHORT).show();
+
         conexionWebService(id_negocio);
 
         //Boton para generar codigo de promocion
@@ -131,6 +145,8 @@ public class FragmentConsultarPromociones extends Fragment {
     private void initComponents(View view) {
         tv_titulo_promociones = view.findViewById(R.id.tv_titulo_promociones);
         tv_descripcion = view.findViewById(R.id.tv_descripcion_promociones);
+        //tv para mostrar codigo
+        tv_codigo_promociones = view.findViewById(R.id.tv_codigo_promociones);
 
         //Boton para generar codigo de promocion
         btn_generar_codigo_promociones = view.findViewById(R.id.btn_generar_codigo_promociones);
@@ -227,13 +243,13 @@ public class FragmentConsultarPromociones extends Fragment {
                     String  codigo, id_promos, estado;
 
                     ID_CODIGO = String.valueOf(codigos.getId_codigo());
-                    codigo = String.valueOf(codigos.getCodigo());
+                    CODIGO = String.valueOf(codigos.getCodigo());
                     id_promos = String.valueOf(codigos.getId_promo());
                     estado = String.valueOf(codigos.getEstado());
 
 
-                    Toast.makeText(getContext(), "Resultado: " + ID_CODIGO + " " + codigo + " "
-                            + id_promos + " " + estado, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Resultado: " + ID_CODIGO + " " + codigo + " "
+                      //      + id_promos + " " + estado, Toast.LENGTH_SHORT).show();
                     RESPUESTA = "si";
 
                     if (RESPUESTA == "si"){
@@ -271,15 +287,16 @@ public class FragmentConsultarPromociones extends Fragment {
         progreso.setMessage("Asignando Código...");
         progreso.show();
 
-        Toast.makeText(getContext(), "Id_codigo: " + id_codigo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Id_codigo: " + id_codigo, Toast.LENGTH_SHORT).show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsInsertarClienteCodigo.php?id_cliente="+ "1" +"&id_codigo="+ id_codigo;
+        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsInsertarClienteCodigo.php?id_cliente="+ ID_CLIENTE_FINAL +"&id_codigo="+ id_codigo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 progreso.hide();
-                Toast.makeText(getContext(), "Codigo Asignado ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Asignando Código", Toast.LENGTH_SHORT).show();
+                actualizarCodigoAsignadoWebService();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -293,6 +310,33 @@ public class FragmentConsultarPromociones extends Fragment {
         request.add(jsonObjectRequest);
     }
 
+    private void actualizarCodigoAsignadoWebService() {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Actualizando código...");
+        progreso.show();
+
+        Toast.makeText(getContext(), "ID_CODIGO: " + ID_CODIGO + " CODIGO: "+ CODIGO, Toast.LENGTH_SHORT).show();
+
+        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsUpdateCodigos.php?id_codigo=" + ID_CODIGO + "&codigo=" + CODIGO;
+
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                progreso.hide();
+                Toast.makeText(getContext(), "Tu código ha sido generado", Toast.LENGTH_SHORT).show();
+                tv_codigo_promociones.setText("Tu código es:\n" + CODIGO);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "No se pudo finalizar tu código", Toast.LENGTH_SHORT).show();
+                System.out.println();
+                progreso.hide();
+                Log.i("ERROR: ", error.toString());
+            }
+        });
+        request.add(jsonObjectRequest);
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event

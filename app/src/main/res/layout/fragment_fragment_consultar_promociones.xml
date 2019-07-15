@@ -13,29 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_marginTop="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/mukta_vaani_extralight"
-            android:gravity="left"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="Promoción del día"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/mukta_vaani_extralight"
-            android:text="Encuentra las mejores promociones del negocio."
-            android:gravity="left"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:textColor="@color/gris_texto"
-            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_titulo_promociones"
@@ -45,9 +23,21 @@
             android:text="Nombre"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp"
-            android:layout_marginTop="15sp"
+            android:layout_marginTop="17dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:gravity="left"
+            android:text="Te mostramos nuestra promocipon del día."
+            android:textColor="@color/gris_texto"
+            android:textSize="14sp"
+            android:layout_marginBottom="22dp"/>
 
         <TextView
             android:id="@+id/tv_descripcion_promociones"
@@ -77,6 +67,19 @@
             android:textColor="#fff"
             android:textSize="13dp" />
 
+
+        <TextView
+            android:id="@+id/tv_codigo_promociones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:layout_marginTop="29dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
 
 
     </LinearLayout>

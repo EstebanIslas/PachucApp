@@ -1,11 +1,14 @@
 package com.estadias.pachuca;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,11 +20,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.estadias.pachuca.fragments.FragmentConsultarNegocio;
+import com.estadias.pachuca.fragments.FragmentConsultarPromociones;
 import com.estadias.pachuca.fragments.FragmentListaCategorias;
 import com.estadias.pachuca.interfaces.IFragments;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , IFragments {
+
+    private String ID_GUARDADO = "";
+    public static final String ID_CLIENTE = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,24 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Recibir variable de la clase login
+        Intent intent = getIntent(); //Objet de tipo intent que recupera la variable
+        String id_guardado = intent.getStringExtra(ActivityLogin.ID_CLIENTE); ////Almacenar el id del cliente de la actividad Login
+        ID_GUARDADO = id_guardado;
+
+        //Enviar el ID_GUARDADO a la clase de FragmentConsultarPromociones
+        Fragment enviarIdPromociones = new FragmentConsultarPromociones(); //Objeto creado para remplazar el fragment
+
+        Bundle bundle = new Bundle(); //variable de tipo paquete para guardar en la variable String final
+        bundle.putString(ID_CLIENTE, ID_GUARDADO);
+
+        //Nuevo metodo
+        SharedPreferences prefe = getSharedPreferences("ID_CLIENTE", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefe.edit();
+        editor.putString(ID_CLIENTE, ID_GUARDADO);
+        editor.commit();
     }
 
     @Override
@@ -96,11 +122,7 @@ public class MainActivity extends AppCompatActivity
 
             Toast.makeText(this, "Selección Perfil", Toast.LENGTH_SHORT).show();
 
-            //Recibir variable de la clase login
-            Intent intent = getIntent(); //Objet de tipo intent que recupera la variable
-            String id_guardado = intent.getStringExtra(ActivityLogin.ID_CLIENTE); ////Almacenar el id del cliente de la actividad Login
-
-            Toast.makeText(this, "Usted tiene de ID: " + id_guardado, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Usted tiene de ID: " + ID_GUARDADO, Toast.LENGTH_SHORT).show();
 
 
         } /*else if (id == R.id.nav_send) {
@@ -110,6 +132,7 @@ public class MainActivity extends AppCompatActivity
          //Si el fragment seleccionado es verdadero reemplaza el contenido de content main por su id
          if (fragmentseleccionado == true){
              getSupportFragmentManager().beginTransaction().replace(R.id.content_main,miFragment).commit(); //Remplaza el fragment seleccionado
+
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
