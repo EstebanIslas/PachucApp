@@ -68,18 +68,58 @@
             android:textSize="13dp" />
 
 
-        <TextView
-            android:id="@+id/tv_codigo_promociones"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/mukta_vaani_extralight"
-            android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="29dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginTop="29dp">
+
+            <TextView
+                android:id="@+id/tv_titulo_codigo_promociones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_codigo_promociones"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_titulo2_codigo_promociones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_disponibilidad_promociones"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

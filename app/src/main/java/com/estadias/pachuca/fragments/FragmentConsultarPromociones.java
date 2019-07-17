@@ -57,6 +57,10 @@ public class FragmentConsultarPromociones extends Fragment {
     TextView tv_descripcion;
     //tv para mostrar codigo
     TextView tv_codigo_promociones;
+    TextView tv_titulo_codigo_promociones;
+    //tv para mostrar disponibilidad de codigo
+    TextView tv_disponibilidad_promociones;
+    TextView tv_titulo2_codigo_promociones;
 
     //Boton para generar codigo de promocion
     Button btn_generar_codigo_promociones;
@@ -147,6 +151,10 @@ public class FragmentConsultarPromociones extends Fragment {
         tv_descripcion = view.findViewById(R.id.tv_descripcion_promociones);
         //tv para mostrar codigo
         tv_codigo_promociones = view.findViewById(R.id.tv_codigo_promociones);
+        tv_titulo_codigo_promociones = view.findViewById(R.id.tv_titulo_codigo_promociones);
+        //tv para mostrar disponibilidad
+        tv_titulo2_codigo_promociones = view.findViewById(R.id.tv_titulo2_codigo_promociones);
+        tv_disponibilidad_promociones = view.findViewById(R.id.tv_disponibilidad_promociones);
 
         //Boton para generar codigo de promocion
         btn_generar_codigo_promociones = view.findViewById(R.id.btn_generar_codigo_promociones);
@@ -192,6 +200,8 @@ public class FragmentConsultarPromociones extends Fragment {
                 tv_titulo_promociones.setText(promociones.getTitulo());
                 tv_descripcion.setText(promociones.getDescripcion());
                 ID_PROMO = String.valueOf(promociones.getId_promo());
+                btn_generar_codigo_promociones.setEnabled(true);
+                consultaClienteCodigoWebService(ID_PROMO, ID_CLIENTE_FINAL);
 
             }
         }, new Response.ErrorListener() {
@@ -199,6 +209,7 @@ public class FragmentConsultarPromociones extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "No existe conexion con el Servidor", Toast.LENGTH_SHORT).show();
                 ID_PROMO = "0";
+                btn_generar_codigo_promociones.setEnabled(false);
                 System.out.println();
                 progreso.hide();
                 Log.i("ERROR: ", error.toString());
@@ -207,6 +218,56 @@ public class FragmentConsultarPromociones extends Fragment {
 
         request.add(jsonObjectRequest);
 
+    }
+
+    private void consultaClienteCodigoWebService(String idPromo, String idCliente) {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Buscando si tienes códigos generados...");
+        progreso.show();
+
+        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsConsultarClienteCodigo.php?id_promo="+ idPromo + "&id_cliente=" + idCliente;
+
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                progreso.hide();
+
+                //variables que guardan el retorno de la consulta json
+                String codigo = "", estado  = "";
+
+                JSONArray json = response.optJSONArray("cliente_codigo"); //Separa el array que muestra el json -> "[cliente_codigo:"
+
+                JSONObject jsonObject = null; //Se encarga de llenar cada objeto dependiendo de lo que tenga la consulta de json
+
+                try{
+                    jsonObject = json.getJSONObject(0);
+                    codigo = jsonObject.optString("codigo");
+                    estado = jsonObject.optString("estado");
+
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i("ERROR: ", e.toString());
+                    Toast.makeText(getContext(), "No existen codigos creados", Toast.LENGTH_SHORT).show();
+                    progreso.hide();
+                }
+
+                tv_titulo_codigo_promociones.setText("Tu código es: ");
+                tv_codigo_promociones.setText(codigo);
+                tv_titulo2_codigo_promociones.setText("Disponibilidad: ");
+                tv_disponibilidad_promociones.setText(estado);
+                btn_generar_codigo_promociones.setEnabled(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                btn_generar_codigo_promociones.setEnabled(true);
+                System.out.println();
+                progreso.hide();
+                Log.i("ERROR: ", error.toString());
+            }
+        });
+
+        request.add(jsonObjectRequest);
     }
 
     private void generarcodigoWebService(final String id_promo) {
@@ -253,7 +314,7 @@ public class FragmentConsultarPromociones extends Fragment {
                     RESPUESTA = "si";
 
                     if (RESPUESTA == "si"){
-                        Toast.makeText(getContext(), "Se encontraron resultados", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Se encontraron resultados", Toast.LENGTH_SHORT).show();
                         insertarClienteCodigoWebService(ID_CODIGO);
 
                     }else{
@@ -295,7 +356,7 @@ public class FragmentConsultarPromociones extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 progreso.hide();
-                Toast.makeText(getContext(), "Asignando Código", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Asignando Código", Toast.LENGTH_SHORT).show();
                 actualizarCodigoAsignadoWebService();
             }
         }, new Response.ErrorListener() {
@@ -324,7 +385,12 @@ public class FragmentConsultarPromociones extends Fragment {
             public void onResponse(JSONObject response) {
                 progreso.hide();
                 Toast.makeText(getContext(), "Tu código ha sido generado", Toast.LENGTH_SHORT).show();
-                tv_codigo_promociones.setText("Tu código es:\n" + CODIGO);
+
+                tv_titulo_codigo_promociones.setText("Tu código es: ");
+                tv_codigo_promociones.setText(CODIGO);
+                tv_titulo2_codigo_promociones.setText("Disponibilidad: ");
+                tv_disponibilidad_promociones.setText("utilizable");
+                btn_generar_codigo_promociones.setEnabled(false);
             }
         }, new Response.ErrorListener() {
             @Override
