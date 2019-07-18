@@ -74,7 +74,8 @@
                     android:text="Descripcion"
                     android:textColor="@color/gris_texto"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"/>
 
                 <TextView
                     android:text="Dirección:"
