@@ -78,9 +78,6 @@ public class FragmentConsultarPromociones extends Fragment {
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
-    //Variable para insertar cliente_codigo
-    StringRequest stringRequest;
-
 
     public FragmentConsultarPromociones() {
         // Required empty public constructor
