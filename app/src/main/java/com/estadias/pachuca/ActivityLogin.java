@@ -46,6 +46,7 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
     //Guardar el id del cliente para usarlo en otro fragment
 
     public static final String ID_CLIENTE = "10";
+    public static final String ID_USUARIO = "10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +149,17 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
                 startActivity(main_activity);
             } else if (rol.equals("user")){
 
-                Toast.makeText(this, "Usted es negocio!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bienvenido!!", Toast.LENGTH_SHORT).show();
+
+                String id_usuario = Integer.toString(login.getId());//Envia el id para usarlo en otro fragment
+
+                //Envia a la otra actividad
+                Intent main_activity_negocio = new Intent(this, MainActivityNegocio.class);//Ayuda a crear funciones para pasar de una pantalla a otra
+
+                main_activity_negocio.putExtra(ID_USUARIO, id_usuario); //Enviar variable
+
+                main_activity_negocio.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); //Para que desaparezca la otra actividad anterior en este caso ActivityLogin
+                startActivity(main_activity_negocio);
             }
 
         }else{
