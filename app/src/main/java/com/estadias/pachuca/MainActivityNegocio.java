@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.estadias.pachuca.fragments.FragmentCrearPromociones;
+import com.estadias.pachuca.fragments.FragmentVerPromociones;
 import com.estadias.pachuca.interfaces.IFragments;
 
 public class MainActivityNegocio extends AppCompatActivity
@@ -102,15 +103,17 @@ public class MainActivityNegocio extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_ver_promos) {
+            miFragment = new FragmentVerPromociones(); //Instanciamos el objeto de tipo fragmet a VerPromociones
+            fragmentseleccionado = true;
 
         } else if (id == R.id.nav_crear_promos) {
             miFragment = new FragmentCrearPromociones(); //Instanciamos el objeto de tipo fragmet a CrearPromociones
             fragmentseleccionado = true;
 
-        } else if (id == R.id.nav_tools) {
+        } /*else if (id == R.id.nav_tools) {
 
-        } else if (id == R.id.nav_share) {
+        } */else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
