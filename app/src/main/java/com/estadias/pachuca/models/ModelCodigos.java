@@ -7,6 +7,26 @@ public class ModelCodigos {
     private Integer id_promo;
     private String estado;
 
+    //Para los datos del cliente
+    private String nombre;
+    private String correo;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public Integer getId_codigo() {
         return id_codigo;
     }

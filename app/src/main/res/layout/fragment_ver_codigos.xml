@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentVerCodigos"
+    android:orientation="vertical"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:layout_marginTop="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Tus Códigos"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Aquí puedes encontrar el número de codigos que generaste y una lista de los que han generado tus clientes."
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/gris_texto"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Número de codigos generados:"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/gris_texto"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_total_codigos_ver_codigos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Número"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Códigos generados por los clientes:"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/gris_texto"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_recycler_ver_codigos_canjeados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

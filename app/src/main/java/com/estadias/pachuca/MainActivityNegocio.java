@@ -50,7 +50,7 @@ public class MainActivityNegocio extends AppCompatActivity
         Intent intent = getIntent(); //Objet de tipo intent que recupera la variable
         String id_guardado = intent.getStringExtra(ActivityLogin.ID_USUARIO); ////Almacenar el id del cliente de la actividad Login
         ID_GUARDADO = id_guardado;
-        Toast.makeText(this, "ID_USUARIO = " + ID_GUARDADO, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "ID_USUARIO = " + ID_GUARDADO, Toast.LENGTH_SHORT).show();
 
         //Nuevo metodo para enviar el id final a cualquier fragment o activity
         SharedPreferences prefe = getSharedPreferences("ID_USUARIO", Context.MODE_PRIVATE);

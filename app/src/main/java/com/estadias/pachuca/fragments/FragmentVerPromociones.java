@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -66,6 +67,8 @@ public class FragmentVerPromociones extends Fragment implements Response.Listene
     public static String ID_NEGOCIO = "0";
     public static String ID_NEGOCIO_FINAL = "";
 
+    public static final String ID_PROMO = "1";
+
 
     public FragmentVerPromociones() {
         // Required empty public constructor
@@ -117,7 +120,7 @@ public class FragmentVerPromociones extends Fragment implements Response.Listene
         String id_usuario = preferences.getString(ID_NEGOCIO, ID_NEGOCIO);
         ID_NEGOCIO_FINAL = id_usuario;
 
-        Toast.makeText(getContext(), "ID: " + id_usuario, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "ID: " + id_usuario, Toast.LENGTH_SHORT).show();
 
         conexionWebService(ID_NEGOCIO_FINAL);
 
@@ -163,6 +166,33 @@ public class FragmentVerPromociones extends Fragment implements Response.Listene
 
             progreso.hide();
             PromocionesListAdapter adapter = new PromocionesListAdapter(listaPromociones);
+
+            adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String datos_promocion = listaPromociones.get(id_recycler_ver_promociones.getChildAdapterPosition(view)).getId_promo().toString();
+                    String id_promocion = datos_promocion;
+
+                    //Toast.makeText(getContext(), "El id es: " + id_promocion, Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
+                    bundle.putString(ID_PROMO, id_promocion);
+                    //Toast.makeText(getContext(), bundle.toString()+ " " + NOMBRE_NEGOCIO, Toast.LENGTH_SHORT).show();
+
+                    //Enviar de un fragment a otro
+                    Fragment consultarCodigo = new FragmentVerCodigos(); //Objeto que llama al fragment que se le enviaran los datos
+                    consultarCodigo.setArguments(bundle); //Se envia como parametro el valor guardado
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
+                    ft.replace(R.id.content_main_negocio, consultarCodigo); //se mapea el id del lugar donde de remplazara
+
+                    /* No cierra el fragment anterior*/
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    ft.addToBackStack(null);
+
+                    ft.commit();
+                }
+            });
 
             id_recycler_ver_promociones.setAdapter(adapter);
 
