@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -64,6 +65,13 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
+    private static String ID_PROMO = "";
+
+    // Variables finales que se envian a otro fragment
+    public static final String CODIGO = "1";
+    public static final String USUARIO = "1";
+    public static final String ID_PROMOCION = "0";
+
 
 
     public FragmentVerCodigos() {
@@ -115,6 +123,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
         //Envio de parametro del otro fragment ListaCategorias
         Bundle bundle = this.getArguments();
         String id_promo = bundle.get(FragmentVerPromociones.ID_PROMO).toString();
+        ID_PROMO = id_promo;
 
         totaldeCodigosWebService(id_promo);
 
@@ -201,6 +210,39 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
             progreso.hide();
             CodigosGeneradosAdapter adapter = new CodigosGeneradosAdapter(listaCodigos);
 
+            adapter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //String datos_promocion = listaPromociones.get(id_recycler_ver_promociones.getChildAdapterPosition(view)).getId_promo().toString();
+                    String codigo_save = listaCodigos.get(id_recycler_ver_codigos_canjeados.getChildAdapterPosition(view)).getCodigo();
+                    String codigo = codigo_save;
+
+                    String id_promo = ID_PROMO;
+
+                    //Toast.makeText(getContext(), "Datos: " + codigo_save + " " + codigo, Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle(); //Paquete que guarda la variable String final
+                    bundle.putString(ID_PROMOCION, id_promo);
+                    bundle.putString(CODIGO, codigo);
+
+                    //Toast.makeText(getContext(), "Datos: " + bundle.toString(), Toast.LENGTH_LONG).show();
+
+                    //Enviar de un fragment a otro
+                    Fragment enviarDatos = new FragmentCanjearCodigo(); //Objeto que llama al fragment que se le enviaran los datos
+                    enviarDatos.setArguments(bundle); //Se envia como parametro el valor guardado
+
+                    FragmentTransaction ft = getFragmentManager().beginTransaction(); //Objeto creado para remplazar el fragment
+                    ft.replace(R.id.content_main_negocio, enviarDatos); //se mapea el id del lugar donde de remplazara
+
+                    /* No cierra el fragment anterior*/
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    ft.addToBackStack(null);
+
+                    ft.commit();
+
+                }
+            });
+
             id_recycler_ver_codigos_canjeados.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -211,7 +253,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No existe conexion con el Servidor", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Parece que no hay códigos generados por los clientes, intentalo en otra ocasión", Toast.LENGTH_SHORT).show();
         System.out.println();
         progreso.hide();
         Log.i("ERROR: ", error.toString());

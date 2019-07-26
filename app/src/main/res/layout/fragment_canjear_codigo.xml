@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentCanjearCodigo"
+    android:orientation="vertical"
+    android:background="#FFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:layout_marginTop="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Canjear Código"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Esta es la información de tu codigo que deseas canjear."
+            android:gravity="left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/gris_texto"
+            android:textSize="14sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="29dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Codigo:"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_codigo_canjear_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del usuario:"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_nombre_canjear_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo:"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_correo_canjear_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado del código:"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_estado_canjear_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_canjear_codigo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="30sp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/mukta_vaani_extralight"
+            android:text="Canjear Codigo"
+            android:textColor="#fff"
+            android:textSize="13dp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

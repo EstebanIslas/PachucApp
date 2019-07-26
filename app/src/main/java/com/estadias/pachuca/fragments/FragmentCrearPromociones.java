@@ -214,7 +214,7 @@ public class FragmentCrearPromociones extends Fragment {
                             });
                         }
                     });
-                    dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    dialogo1.setNegativeButton("No crear", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogo1, int id) {
                             Toast.makeText(getContext(), "Promoción creada sin códigos!", Toast.LENGTH_SHORT).show();
                         }
@@ -247,6 +247,7 @@ public class FragmentCrearPromociones extends Fragment {
         progreso = new ProgressDialog(getContext());
         progreso.setMessage("Generando Códigos...");
         progreso.show();
+        progreso.setCancelable(false);
 
         int total_numeros = Integer.parseInt(edt_numero_codigos_crear_promociones.getText().toString());
 
@@ -259,6 +260,7 @@ public class FragmentCrearPromociones extends Fragment {
                 @Override
                 public void onResponse(JSONObject response) {
                     progreso.hide();
+                    progreso.setCancelable(true);
 
                     ModelCodigos codigos = new ModelCodigos();
 
@@ -305,6 +307,7 @@ public class FragmentCrearPromociones extends Fragment {
                     Toast.makeText(getContext(), "No se pudo generar los codigos", Toast.LENGTH_SHORT).show();
                     System.out.println();
                     progreso.hide();
+                    progreso.setCancelable(true);
                     Log.i("ERROR: ", error.toString());
                 }
             });
