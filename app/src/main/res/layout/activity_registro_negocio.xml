@@ -336,20 +336,12 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
-                <EditText
-                    android:id="@+id/edt_categoria_reg_negocio"
+                <Spinner
+                    android:id="@+id/spin_categoria_reg_negocio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30sp"
-                    android:layout_marginRight="30sp"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:fontFamily="@font/mukta_vaani_extralight"
-                    android:hint="Categoria"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/gris_texto"
-                    android:textColorHint="@color/gris_texto"
-                    android:textColorLink="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"></Spinner>
             </LinearLayout>
 
 

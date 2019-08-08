@@ -12,9 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,9 +42,14 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
     EditText edt_descripcion_reg_negocio;
     EditText edt_telefono1_reg_negocio;
     EditText edt_password_reg_negocio;
-    EditText edt_categoria_reg_negocio;
+    //EditText edt_categoria_reg_negocio;
     EditText edt_municipio_reg_negocio;
     EditText edt_confirm_pass_reg_negocio;
+
+    private static String CATEGORIA = "";
+
+    //Spinner para categorias
+    Spinner spin_categoria_reg_negocio;
 
     Button btn_registrar_negocio;
 
@@ -71,6 +79,23 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
 
         request = Volley.newRequestQueue(this);
 
+        String[] categorias = {"Comercios", "Entretenimiento", "Escuelas", "Hoteles", "Profesionales", "Restaurantes", "Transportes", "Otros"};
+        spin_categoria_reg_negocio.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_design_text, categorias)); //Se agrega el arreglo a la parte grafica
+        spin_categoria_reg_negocio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String categoria = (String) adapterView.getItemAtPosition(i);
+                //Toast.makeText(getApplicationContext(), (String) adapterView.getItemAtPosition(i), Toast.LENGTH_SHORT).show();
+                CATEGORIA = categoria;
+                //Toast.makeText(getApplicationContext(), "Categoria: " + CATEGORIA, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         btn_registrar_negocio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +122,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
         edt_descripcion_reg_negocio = findViewById(R.id.edt_descripcion_reg_negocio);
         edt_telefono1_reg_negocio = findViewById(R.id.edt_telefono1_reg_negocio);
         edt_password_reg_negocio = findViewById(R.id.edt_password_reg_negocio);
-        edt_categoria_reg_negocio = findViewById(R.id.edt_categoria_reg_negocio);
+        //edt_categoria_reg_negocio = findViewById(R.id.edt_categoria_reg_negocio);
         edt_municipio_reg_negocio = findViewById(R.id.edt_municipio_reg_negocio);
         edt_confirm_pass_reg_negocio = findViewById(R.id.edt_confirm_pass_reg_negocio);
 
@@ -108,6 +133,8 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
         img_imagen_reg_negocio = findViewById(R.id.img_imagen_reg_negocio);
         btn_seleccionar_imagen_negocio = findViewById(R.id.btn_seleccionar_imagen_negocio);
 
+        //Spiner para categoria
+        spin_categoria_reg_negocio = findViewById(R.id.spin_categoria_reg_negocio);
     }
 
 
@@ -121,7 +148,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
         edt_descripcion_reg_negocio.setText("");
         edt_telefono1_reg_negocio.setText("");
         edt_password_reg_negocio.setText("");
-        edt_categoria_reg_negocio.setText("");
+        //edt_categoria_reg_negocio.setText("");
         edt_municipio_reg_negocio.setText("");
         edt_confirm_pass_reg_negocio.setText("");
 
@@ -202,7 +229,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
                     String descripcion = edt_descripcion_reg_negocio.getText().toString();
                     String telefono1 = edt_telefono1_reg_negocio.getText().toString();
                     String password = edt_password_reg_negocio.getText().toString();
-                    String categoria = edt_categoria_reg_negocio.getText().toString();
+                    //String categoria = edt_categoria_reg_negocio.getText().toString();
                     String municipio = edt_municipio_reg_negocio.getText().toString();
 
                     String imagen = convertitImgString(bitmap);
@@ -219,14 +246,14 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
                     parametros.put("descripcion", descripcion);
                     parametros.put("telefono1", telefono1);
                     parametros.put("password", finalSave_password);
-                    parametros.put("categoria", categoria);
+                    parametros.put("categoria", CATEGORIA);
                     parametros.put("municipio", municipio);
 
                     parametros.put("imagen", imagen);
 
 
                     System.out.println("Resultado= " + nombre + " " + correo + " " + calle + " " + colonia +
-                            " " + numero + " " + descripcion + " " + telefono1 + " " + finalSave_password + " " + categoria + " " + municipio);
+                            " " + numero + " " + descripcion + " " + telefono1 + " " + finalSave_password + " " + CATEGORIA + " " + municipio);
 
                     return parametros;
                 }
