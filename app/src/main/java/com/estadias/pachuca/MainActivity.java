@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.estadias.pachuca.fragments.FragmentConsultarInfoCliente;
 import com.estadias.pachuca.fragments.FragmentConsultarNegocio;
 import com.estadias.pachuca.fragments.FragmentConsultarPromociones;
 import com.estadias.pachuca.fragments.FragmentListaCategorias;
@@ -52,13 +53,7 @@ public class MainActivity extends AppCompatActivity
         String id_guardado = intent.getStringExtra(ActivityLogin.ID_CLIENTE); ////Almacenar el id del cliente de la actividad Login
         ID_GUARDADO = id_guardado;
 
-        //Enviar el ID_GUARDADO a la clase de FragmentConsultarPromociones
-        Fragment enviarIdPromociones = new FragmentConsultarPromociones(); //Objeto creado para remplazar el fragment
-
-        Bundle bundle = new Bundle(); //variable de tipo paquete para guardar en la variable String final
-        bundle.putString(ID_CLIENTE, ID_GUARDADO);
-
-        //Nuevo metodo
+        //Enviar el ID_GUARDADO a la clase de FragmentConsultarPromociones Nuevo metodo
         SharedPreferences prefe = getSharedPreferences("ID_CLIENTE", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = prefe.edit();
@@ -120,9 +115,8 @@ public class MainActivity extends AppCompatActivity
 
         } */else if (id == R.id.nav_profile) {
 
-            Toast.makeText(this, "Selección Perfil", Toast.LENGTH_SHORT).show();
-
-            Toast.makeText(this, "Usted tiene de ID: " + ID_GUARDADO, Toast.LENGTH_SHORT).show();
+            miFragment = new FragmentConsultarInfoCliente();
+            fragmentseleccionado = true;
 
 
         } /*else if (id == R.id.nav_send) {

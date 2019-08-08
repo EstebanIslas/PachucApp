@@ -1,6 +1,7 @@
 package com.estadias.pachuca.interfaces;
 
 import com.estadias.pachuca.fragments.FragmentCanjearCodigo;
+import com.estadias.pachuca.fragments.FragmentConsultarInfoCliente;
 import com.estadias.pachuca.fragments.FragmentConsultarInfoNegocio;
 import com.estadias.pachuca.fragments.FragmentConsultarNegocio;
 import com.estadias.pachuca.fragments.FragmentConsultarPromociones;
@@ -18,5 +19,6 @@ public interface IFragments extends FragmentListaCategorias.OnFragmentInteractio
         , FragmentVerPromociones.OnFragmentInteractionListener
         , FragmentVerCodigos.OnFragmentInteractionListener
         , FragmentCanjearCodigo.OnFragmentInteractionListener
-        , FragmentConsultarInfoNegocio.OnFragmentInteractionListener {
+        , FragmentConsultarInfoNegocio.OnFragmentInteractionListener
+        , FragmentConsultarInfoCliente.OnFragmentInteractionListener {
 }
