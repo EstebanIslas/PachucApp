@@ -14,14 +14,6 @@
             android:id="@+id/nav_categorias"
             android:icon="@drawable/explore"
             android:title="Explorar Categorias" />
-        <!--item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" /-->
-        <!--item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" /-->
     </group>
 
     <item android:title="Información">
@@ -30,10 +22,6 @@
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/profile"
                 android:title="Mi Perfil" />
-            <!--item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" /-->
         </menu>
     </item>
 

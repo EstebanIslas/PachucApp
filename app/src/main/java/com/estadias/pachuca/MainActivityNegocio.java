@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.estadias.pachuca.fragments.FragmentConsultarInfoNegocio;
 import com.estadias.pachuca.fragments.FragmentCrearPromociones;
 import com.estadias.pachuca.fragments.FragmentVerPromociones;
 import com.estadias.pachuca.interfaces.IFragments;
@@ -86,6 +87,7 @@ public class MainActivityNegocio extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(this, "Sargon Systems", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -113,10 +115,9 @@ public class MainActivityNegocio extends AppCompatActivity
 
         } /*else if (id == R.id.nav_tools) {
 
-        } */else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } */else if (id == R.id.nav_profile) {
+            miFragment = new FragmentConsultarInfoNegocio();
+            fragmentseleccionado = true;
         }
 
         //Si el fragment seleccionado es verdadero reemplaza el contenido de content main por su id

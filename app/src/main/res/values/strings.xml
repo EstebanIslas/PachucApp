@@ -15,7 +15,5 @@
     <string name="menu_home">Home</string>
     <string name="menu_ver_promos">Ver Promociones</string>
     <string name="menu_crear_promos">Crear Promoción</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_profile">Mi Perfil</string>
 </resources>

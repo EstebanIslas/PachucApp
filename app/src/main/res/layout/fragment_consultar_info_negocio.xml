@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentConsultarInfoNegocio"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/gris_background"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
+
+                <ImageView
+                    android:id="@+id/imv_logo_consulta_info_neg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/profile"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gris_lineas"/>
+
+            <TextView
+                android:id="@+id/tv_nombre_consulta_info_neg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:gravity="center"
+                android:text="Nombre"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="19sp"
+                android:layout_marginTop="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Para editar tu información te sugerimos ingresar a nuestro sitio web"
+                android:textColor="@color/gris_texto"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:text="Descripción:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_descripcion_consulta_info_neg"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:text="Descripcion"
+                    android:textColor="@color/gris_texto"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="Dirección:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_dir_completa_consulta_info_neg"
+                    android:text="Calle"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Teléfono:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_telefono1_consulta_info_neg"
+                    android:text="Telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+
+
+                <TextView
+                    android:text="Ubicación:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_ubicacion_consulta_info_neg"
+                    android:text="Ubicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Correo:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_correo_consulta_info_neg"
+                    android:text="Correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Sitio Web:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sitio_web_consulta_info_neg"
+                    android:text="Sitio Web"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Visibilidad:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#424242"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_estado_consulta_info_neg"
+                    android:text="Visibilidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_texto"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_visibilidad_texto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:text="Si tu empresa no se encuentra visibible es probable que aun no hayas hecho un pago contacta a Sargon Systems para remendar el error."
+                    android:textColor="@color/gris_texto"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
