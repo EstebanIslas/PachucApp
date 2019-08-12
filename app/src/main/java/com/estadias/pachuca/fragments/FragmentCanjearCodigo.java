@@ -53,6 +53,7 @@ public class FragmentCanjearCodigo extends Fragment {
     TextView tv_nombre_canjear_codigo;
     TextView tv_correo_canjear_codigo;
     TextView tv_estado_canjear_codigo;
+    TextView tv_clave_ine_canjear_codigo;
 
     Button btn_canjear_codigo;
 
@@ -126,6 +127,7 @@ public class FragmentCanjearCodigo extends Fragment {
         tv_codigo_canjear_codigo = view.findViewById(R.id.tv_codigo_canjear_codigo);
         tv_correo_canjear_codigo = view.findViewById(R.id.tv_correo_canjear_codigo);
         tv_estado_canjear_codigo = view.findViewById(R.id.tv_estado_canjear_codigo);
+        tv_clave_ine_canjear_codigo = view.findViewById(R.id.tv_clave_ine_canjear_codigo);
 
         btn_canjear_codigo = view.findViewById(R.id.btn_canjear_codigo);
 
@@ -137,7 +139,7 @@ public class FragmentCanjearCodigo extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsSeleccionarClienteCodigoPromocion.php?"
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsSeleccionarClienteCodigoPromocion.php?"
                 +"id_promo=" + id_promo + "&codigo=" + codigo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -160,6 +162,7 @@ public class FragmentCanjearCodigo extends Fragment {
                     codigos.setCodigo(jsonObject.optString("codigo"));
                     codigos.setNombre(jsonObject.optString("nombre"));
                     codigos.setCorreo(jsonObject.optString("correo"));
+                    codigos.setClave_ine(jsonObject.optString("clave_ine"));
                     codigos.setEstado(jsonObject.optString("estado"));
 
                 } catch (JSONException e) {
@@ -177,6 +180,7 @@ public class FragmentCanjearCodigo extends Fragment {
                 tv_codigo_canjear_codigo.setText(codigo);
                 tv_correo_canjear_codigo.setText(codigos.getCorreo());
                 tv_estado_canjear_codigo.setText(estado);
+                tv_clave_ine_canjear_codigo.setText(codigos.getClave_ine());
 
                 if (estado.equals("utilizable")){
                     btn_canjear_codigo.setVisibility(View.VISIBLE);
@@ -214,7 +218,7 @@ public class FragmentCanjearCodigo extends Fragment {
         progreso.show();
 
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsUpdateCanjeCodigo.php?codigo=" + codigo  + "&id_promo=" + id_promo;
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsUpdateCanjeCodigo.php?codigo=" + codigo  + "&id_promo=" + id_promo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override

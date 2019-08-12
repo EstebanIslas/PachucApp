@@ -42,10 +42,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="29dp">
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
                 android:text="Codigo:"
                 android:fontFamily="@font/mukta_vaani_extralight"
                 android:textSize="14sp"
-                android:layout_marginRight="10dp"/>
+                android:layout_gravity="center"/>
 
             <TextView
                 android:id="@+id/tv_codigo_canjear_codigo"
@@ -63,7 +64,9 @@
                 android:fontFamily="@font/mukta_vaani_extralight"
                 android:text=""
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp" />
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
         </LinearLayout>
 
@@ -112,6 +115,34 @@
 
             <TextView
                 android:id="@+id/tv_correo_canjear_codigo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones_estilo"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clave de Elector:"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_clave_ine_canjear_codigo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/botones_estilo"

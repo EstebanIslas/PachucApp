@@ -54,6 +54,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
 
     TextView tv_nombre_consulta_info_cliente;
     TextView tv_correo_consulta_info_cliente;
+    TextView tv_clave_ine_consulta_info_cliente;
 
     ProgressDialog progreso; //Para generar una ventana de carga mientras se ejecutan las peticiones
 
@@ -118,6 +119,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
     private void initComponents(View view) {
         tv_nombre_consulta_info_cliente = view.findViewById(R.id.tv_nombre_consulta_info_cliente);
         tv_correo_consulta_info_cliente = view.findViewById(R.id.tv_correo_consulta_info_cliente);
+        tv_clave_ine_consulta_info_cliente = view.findViewById(R.id.tv_clave_ine_consulta_info_cliente);
     }
 
     private void conexionWebService(String id_cliente) {
@@ -125,7 +127,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_clientes/wsSelectOneCliente.php?id_cliente="+ id_cliente;
+        String URL = "http://192.168.1.69/PachucaService/api_clientes/wsSelectOneCliente.php?id_cliente="+ id_cliente;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -147,6 +149,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
                     clientes.setId_cliente(jsonObject.optInt("id_cliente"));
                     clientes.setNombre(jsonObject.optString("nombre"));
                     clientes.setCorreo(jsonObject.optString("correo"));
+                    clientes.setClave_ine(jsonObject.optString("clave_ine"));
 
 
                 }catch (JSONException e) {
@@ -157,6 +160,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
 
                 tv_nombre_consulta_info_cliente.setText(clientes.getNombre());
                 tv_correo_consulta_info_cliente.setText(clientes.getCorreo());
+                tv_clave_ine_consulta_info_cliente.setText(clientes.getClave_ine());
 
             }
         }, new Response.ErrorListener() {

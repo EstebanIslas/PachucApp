@@ -10,6 +10,15 @@ public class ModelCodigos {
     //Para los datos del cliente
     private String nombre;
     private String correo;
+    private String clave_ine;
+
+    public String getClave_ine() {
+        return clave_ine;
+    }
+
+    public void setClave_ine(String clave_ine) {
+        this.clave_ine = clave_ine;
+    }
 
     public String getNombre() {
         return nombre;

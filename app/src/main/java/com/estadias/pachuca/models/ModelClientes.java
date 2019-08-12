@@ -9,7 +9,7 @@ public class ModelClientes {
     private String nombre;
     private  String correo;
     private String password;
-    private String ruta_imagen;
+    private String clave_ine;
 
     public Integer getId_cliente() {
         return id_cliente;
@@ -43,11 +43,11 @@ public class ModelClientes {
         this.password = password;
     }
 
-    public String getRuta_imagen() {
-        return ruta_imagen;
+    public String getClave_ine() {
+        return clave_ine;
     }
 
-    public void setRuta_imagen(String ruta_imagen) {
-        this.ruta_imagen = ruta_imagen;
+    public void setClave_ine(String ruta_imagen) {
+        this.clave_ine= ruta_imagen;
     }
 }
