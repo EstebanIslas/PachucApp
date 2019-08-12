@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ActivityRegistroNegocio extends AppCompatActivity {
 
@@ -163,7 +165,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
 
         //Variables para igualar contraseñas de usuario
         String pass, save_password = "";
-        boolean registro;
+        boolean registro, valida, valida_email;;
         pass = edt_password_reg_negocio.getText().toString(); //Se envia lo que tiene password a la variable
 
         if (pass.equals(edt_confirm_pass_reg_negocio.getText().toString())){
@@ -174,12 +176,32 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
             Toast.makeText(this, "Las contraseñas no coinciden!!", Toast.LENGTH_SHORT).show();
             progreso.hide();
         }
+        // Validacion de campos vacios
+        if (edt_nombre_reg_negocio.getText().toString().isEmpty() || edt_correo_reg_negocio.getText().toString().isEmpty()
+                || edt_calle_reg_negocio.getText().toString().isEmpty() || edt_colonia_reg_negocio.getText().toString().isEmpty()
+                || edt_colonia_reg_negocio.getText().toString().isEmpty() || edt_numero_reg_negocio.getText().toString().isEmpty()
+                || edt_municipio_reg_negocio.getText().toString().isEmpty() || edt_descripcion_reg_negocio.getText().toString().isEmpty()
+                || edt_telefono1_reg_negocio.getText().toString().isEmpty() || edt_password_reg_negocio.getText().toString().isEmpty()){
 
-        if (registro == true) {
+            valida = false;
+            Toast.makeText(this, "Existen campos vacíos!", Toast.LENGTH_SHORT).show();
+
+        }else {
+            valida = true;
+        }
+
+        if (!validarEmail(edt_correo_reg_negocio.getText().toString())){
+            edt_correo_reg_negocio.setError("Email no valido");
+            valida_email = false;
+        }else {
+            valida_email = true;
+        }
+
+        if (registro == true && valida == true && valida_email == true) {
 
 
             //Url para metodo POST
-            String URL = "http://192.168.1.73/PachucaService/api_usuarios/wsInsertarUsuarios.php";
+            String URL = "http://192.168.1.69/PachucaService/api_usuarios/wsInsertarUsuarios.php";
 
             Toast.makeText(this, "Esto puede tardar unos minutos", Toast.LENGTH_SHORT).show();
 
@@ -215,7 +237,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progreso.hide();
-                    Toast.makeText(getApplicationContext(), "No hay conexion al Servidor\n" + error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Parece que hay problemas para registrar, revisa el llenado de campos o tu conexión a internet", Toast.LENGTH_LONG).show();
                 }
             }) {
                 @Override
@@ -264,7 +286,8 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
 
 
         }else {
-            Toast.makeText(this, "No se puede registrar el usuario", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No se pudo registrar el negocio intentelo mas tarde", Toast.LENGTH_SHORT).show();
+            progreso.hide();
         }
     }
 
@@ -354,6 +377,12 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
     /* Retorna un hash SHA1 a partir de un texto */
     private static String sha1(String txt) {
         return getHash(txt, "SHA1");
+    }
+
+    /* Valida el correo electronico  */
+    private boolean validarEmail(String email){
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 
 }

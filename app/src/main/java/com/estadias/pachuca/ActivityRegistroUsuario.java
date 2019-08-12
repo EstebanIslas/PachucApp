@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ActivityRegistroUsuario extends AppCompatActivity{
 
@@ -31,6 +33,8 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
     EditText edt_correo_registro_usuario;
     EditText edt_password_registro_usuario;
     EditText edt_conf_password_ru;
+    EditText edt_clave_elector_registro_usuario;
+
     Button btn_registrar_usuario;
 
     ProgressDialog progreso; //Para generar una ventana de carga mienteas se ejecutan las peticiones
@@ -67,7 +71,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
         String pass, save_password = "";
 
         pass = edt_password_registro_usuario.getText().toString();
-        boolean registro;
+        boolean registro, valida, valida_email;
 
         if (pass.equals(edt_conf_password_ru.getText().toString())){
             save_password= ActivityRegistroUsuario.md5(edt_conf_password_ru.getText().toString());
@@ -78,10 +82,26 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
             progreso.hide();
         }
 
-        if (registro == true) {
+        if (edt_nombre_registro_usuario.getText().toString().isEmpty() || edt_correo_registro_usuario.getText().toString().isEmpty()
+                || edt_clave_elector_registro_usuario.getText().toString().isEmpty() || edt_password_registro_usuario.getText().toString().isEmpty()){
+            valida = false;
+            Toast.makeText(this, "Existen campos vacíos!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            valida = true;
+        }
+
+        if (!validarEmail(edt_correo_registro_usuario.getText().toString())){
+            edt_correo_registro_usuario.setError("Email no valido");
+            valida_email = false;
+        }else {
+            valida_email = true;
+        }
+
+        if (registro == true && valida == true && valida_email == true) {
                 /*String URL = "http://2428ffab.ngrok.io/Webservice/api_clientes/wsJSONInsertarCliente.php?nombre=" + edt_nombre_registro_usuario.getText().toString()
                         + "&correo=" + edt_correo_registro_usuario.getText().toString() + "&password=" + save_password;*/
-            String URL= "http://192.168.1.73/PachucaService/api_clientes/wsClientesInsert.php";
+            String URL= "http://192.168.1.69/PachucaService/api_clientes/wsClientesInsert.php";
 
             /*
              * Se implementa la clase volley directa para este metodo POST
@@ -107,6 +127,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
                         edt_correo_registro_usuario.setText("");
                         edt_password_registro_usuario.setText("");
                         edt_conf_password_ru.setText("");
+                        edt_clave_elector_registro_usuario.setText("");
                     }
 
                     }
@@ -114,7 +135,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progreso.hide();
-                    Toast.makeText(getApplicationContext(), "Ocurrio un problema con el servidor " +error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Ocurrio un problema con la conexión del servidor " +error.toString(), Toast.LENGTH_SHORT).show();
                     Log.i("Error",error.toString());
                 }
             }){
@@ -122,6 +143,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
                 protected Map<String, String> getParams() throws AuthFailureError {
                     String nombre = edt_nombre_registro_usuario.getText().toString();
                     String correo = edt_correo_registro_usuario.getText().toString();
+                    String clave_ine = edt_clave_elector_registro_usuario.getText().toString();
 
                     //Estructura para enviar al webservice por POST
 
@@ -129,6 +151,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
 
                     parametros.put("nombre", nombre);
                     parametros.put("correo", correo);
+                    parametros.put("clave_ine", clave_ine);
                     parametros.put("password", finalSave_password);
 
                     return parametros;
@@ -139,6 +162,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
 
         }else {
             Toast.makeText(this, "No se pudo registrar!!", Toast.LENGTH_SHORT).show();
+            progreso.hide();
         }
     }
 
@@ -147,31 +171,10 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
         edt_correo_registro_usuario = findViewById(R.id.edt_correo_registro_usuario);
         edt_password_registro_usuario = findViewById(R.id.edt_password_registro_usuario);
         edt_conf_password_ru = findViewById(R.id.edt_confir_password_ru);
+        edt_clave_elector_registro_usuario = findViewById(R.id.edt_clave_elector_registro_usuario);
 
         btn_registrar_usuario = findViewById(R.id.btn_registrar_usuario);
     }
-
-    /*@Override
-    public void onResponse(JSONObject response) {
-        Toast.makeText(this, "Se ha realizado el registro", Toast.LENGTH_SHORT).show();
-
-        Intent login = new Intent(this, ActivityLogin.class);//Ayuda a crear fucniones para pasar de una pantalla a otra
-        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(login);
-
-        progreso.hide();
-        edt_nombre_registro_usuario.setText("");
-        edt_correo_registro_usuario.setText("");
-        edt_password_registro_usuario.setText("");
-        edt_conf_password_ru.setText("");
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        progreso.hide();
-        Toast.makeText(this, "No Se ha realizado el registro" +error.toString(), Toast.LENGTH_SHORT).show();
-        Log.i("Error",error.toString());
-    }*/
 
     private static String getHash(String txt, String hashType) {
         try {
@@ -198,6 +201,12 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
     /* Retorna un hash SHA1 a partir de un texto */
     private static String sha1(String txt) {
         return getHash(txt, "SHA1");
+    }
+
+    /* Valida el correo electronico  */
+    private boolean validarEmail(String email){
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
 
 }
