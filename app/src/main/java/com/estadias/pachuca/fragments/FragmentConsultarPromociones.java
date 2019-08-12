@@ -163,7 +163,7 @@ public class FragmentConsultarPromociones extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_promociones/wsConsultarPromocionReciente.php?id=" + id_negocio;
+        String URL = "http://192.168.1.69/PachucaService/api_promociones/wsConsultarPromocionReciente.php?id=" + id_negocio;
 
         //new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
 
@@ -222,7 +222,7 @@ public class FragmentConsultarPromociones extends Fragment {
         progreso.setMessage("Buscando si tienes códigos generados...");
         progreso.show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsConsultarClienteCodigo.php?id_promo="+ idPromo + "&id_cliente=" + idCliente;
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsConsultarClienteCodigo.php?id_promo="+ idPromo + "&id_cliente=" + idCliente;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -276,7 +276,7 @@ public class FragmentConsultarPromociones extends Fragment {
 
         //Toast.makeText(getContext(), "Id_promo = " + id_promo, Toast.LENGTH_SHORT).show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsSelectFirstCodigos.php?id_promo=" + id_promo;
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsSelectFirstCodigos.php?id_promo=" + id_promo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -347,7 +347,7 @@ public class FragmentConsultarPromociones extends Fragment {
 
         //Toast.makeText(getContext(), "Id_codigo: " + id_codigo, Toast.LENGTH_SHORT).show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsInsertarClienteCodigo.php?id_cliente="+ ID_CLIENTE_FINAL +"&id_codigo="+ id_codigo;
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsInsertarClienteCodigo.php?id_cliente="+ ID_CLIENTE_FINAL +"&id_codigo="+ id_codigo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -375,7 +375,7 @@ public class FragmentConsultarPromociones extends Fragment {
 
         Toast.makeText(getContext(), "ID_CODIGO: " + ID_CODIGO + " CODIGO: "+ CODIGO, Toast.LENGTH_SHORT).show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_codigos/wsUpdateCodigos.php?id_codigo=" + ID_CODIGO + "&codigo=" + CODIGO;
+        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsUpdateCodigos.php?id_codigo=" + ID_CODIGO + "&codigo=" + CODIGO;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override

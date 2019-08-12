@@ -132,7 +132,7 @@ public class FragmentVerPromociones extends Fragment implements Response.Listene
         progreso.setMessage("Conectando...");
         progreso.show();
 
-        String url = "http://192.168.1.73/PachucaService/api_promociones/wsConsultarPromociones.php?id=" + id_negocio;
+        String url = "http://192.168.1.69/PachucaService/api_promociones/wsConsultarPromociones.php?id=" + id_negocio;
 
         jsonObjectRequest= new JsonObjectRequest(Request.Method.GET,url,null,this,this);
 

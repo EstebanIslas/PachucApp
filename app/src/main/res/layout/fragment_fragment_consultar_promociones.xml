@@ -34,7 +34,7 @@
             android:layout_marginRight="30dp"
             android:fontFamily="@font/mukta_vaani_extralight"
             android:gravity="left"
-            android:text="Te mostramos nuestra promocipon del día."
+            android:text="Te mostramos nuestra promoción del día."
             android:textColor="@color/gris_texto"
             android:textSize="14sp"
             android:layout_marginBottom="22dp"/>

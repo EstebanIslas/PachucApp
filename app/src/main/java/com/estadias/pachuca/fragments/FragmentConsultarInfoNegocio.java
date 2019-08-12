@@ -149,7 +149,7 @@ public class FragmentConsultarInfoNegocio extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.73/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+ id_usuario;
+        String URL = "http://192.168.1.69/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+ id_usuario;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -210,7 +210,7 @@ public class FragmentConsultarInfoNegocio extends Fragment {
                 /*
                  * Logica para cargar imagen desde WS por URL
                  */
-                String logo_url = "http://192.168.1.73/PachucaService/api_usuarios/" + negocios.getLogo();
+                String logo_url = "http://192.168.1.69/PachucaService/api_usuarios/" + negocios.getLogo();
 
                 conexionWebServiceLogoUrl(logo_url);
 
