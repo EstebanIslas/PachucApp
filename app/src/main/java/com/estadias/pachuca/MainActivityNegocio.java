@@ -92,7 +92,7 @@ public class MainActivityNegocio extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(this, "Sargon Systems", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sargon Systems\nDesarrollada por Esteban Islas", Toast.LENGTH_SHORT).show();
             return true;
         }
 
