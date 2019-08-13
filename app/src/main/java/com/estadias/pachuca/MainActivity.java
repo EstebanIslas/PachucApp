@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.estadias.pachuca.fragments.FragmentConsultarInfoCliente;
 import com.estadias.pachuca.fragments.FragmentConsultarNegocio;
 import com.estadias.pachuca.fragments.FragmentConsultarPromociones;
+import com.estadias.pachuca.fragments.FragmentIndexCliente;
 import com.estadias.pachuca.fragments.FragmentListaCategorias;
 import com.estadias.pachuca.interfaces.IFragments;
 
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        Fragment fragment = new FragmentIndexCliente();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_main,fragment).commit(); //Remplaza el fragment seleccionado
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(this, "Sargon Systems", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -103,6 +109,8 @@ public class MainActivity extends AppCompatActivity
         boolean fragmentseleccionado = false;
 
         if (id == R.id.nav_home) {
+            miFragment = new FragmentIndexCliente();
+            fragmentseleccionado = true;
 
         } else if (id == R.id.nav_categorias) {
 

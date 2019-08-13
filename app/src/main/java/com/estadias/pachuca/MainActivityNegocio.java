@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.estadias.pachuca.fragments.FragmentConsultarInfoNegocio;
 import com.estadias.pachuca.fragments.FragmentCrearPromociones;
+import com.estadias.pachuca.fragments.FragmentIndexCliente;
 import com.estadias.pachuca.fragments.FragmentVerPromociones;
 import com.estadias.pachuca.interfaces.IFragments;
 
@@ -43,6 +44,10 @@ public class MainActivityNegocio extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        Fragment fragment = new FragmentIndexCliente();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_main_negocio,fragment).commit(); //Remplaza el fragment seleccionado
+
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -104,7 +109,8 @@ public class MainActivityNegocio extends AppCompatActivity
         boolean fragmentseleccionado = false;
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            miFragment = new FragmentIndexCliente();
+            fragmentseleccionado = true;
         } else if (id == R.id.nav_ver_promos) {
             miFragment = new FragmentVerPromociones(); //Instanciamos el objeto de tipo fragmet a VerPromociones
             fragmentseleccionado = true;

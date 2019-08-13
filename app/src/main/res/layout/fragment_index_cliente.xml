@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentIndexCliente"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_marginTop="17dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="Bienvenido"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/gris_background"
+                android:layout_marginTop="15sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imv_logo_categoria_list_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:src="@drawable/panorama" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="2sp"
+                        android:id="@+id/tv_nombre_categoria_list_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="La historia del estado"
+                        android:fontFamily="@font/mukta_vaani_extralight"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="#424242"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/mukta_vaani_extralight"
+                        android:text="Pachuca De Soto"
+                        android:textColor="@color/gris_texto"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gris_lineas"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Esta es tu App Pachuca.com.mx"
+                android:gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mukta_vaani_extralight"
+                android:text="Bienvenido usuario, en esta aplicación te mostramos los diferentes negocios que existen en la ciudad. \nEn esta puedes encontrar cada negocio dependiendo de su categoría, en esta app puedes encontrar la informacion de los negocios, llamar, mensajear y ver las promociones que los negocios tienen para ti."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/gris_texto"
+                android:textSize="14sp"
+                android:layout_marginBottom="25dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
