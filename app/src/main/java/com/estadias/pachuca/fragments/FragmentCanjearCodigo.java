@@ -139,7 +139,7 @@ public class FragmentCanjearCodigo extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsSeleccionarClienteCodigoPromocion.php?"
+        String URL = "https://pachuca.com.mx/webservice/api_codigos/wsSeleccionarClienteCodigoPromocion.php?"
                 +"id_promo=" + id_promo + "&codigo=" + codigo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -218,7 +218,7 @@ public class FragmentCanjearCodigo extends Fragment {
         progreso.show();
 
 
-        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsUpdateCanjeCodigo.php?codigo=" + codigo  + "&id_promo=" + id_promo;
+        String URL = "https://pachuca.com.mx/webservice/api_codigos/wsUpdateCanjeCodigo.php?codigo=" + codigo  + "&id_promo=" + id_promo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override

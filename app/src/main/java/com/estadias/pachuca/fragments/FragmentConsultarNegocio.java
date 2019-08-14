@@ -212,7 +212,7 @@ public class FragmentConsultarNegocio extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.69/PachucaService/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
+        String URL = "https://pachuca.com.mx/webservice/api_usuarios/wsSelectOneUsuario.php?id="+id_negocio;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -237,7 +237,7 @@ public class FragmentConsultarNegocio extends Fragment {
                     negocios.setColonia(jsonObject.optString("colonia"));
                     negocios.setNumero(jsonObject.optString("numero"));
                     negocios.setMunicipio(jsonObject.optString("municipio"));
-                    negocios.setTelefono1(jsonObject.optString("telefono1"));
+                    negocios.setTelefono1(jsonObject.optString("telefono"));
                     negocios.setMaps_url(jsonObject.optString("maps_url"));
                     negocios.setCorreo(jsonObject.optString("correo"));
                     negocios.setSitio_web(jsonObject.optString("sitio_web"));
@@ -262,7 +262,7 @@ public class FragmentConsultarNegocio extends Fragment {
                 /*
                  * Logica para cargar imagen desde WS por URL
                  */
-                String logo_url = "http://192.168.1.69/PachucaService/api_usuarios/" + negocios.getLogo();
+                String logo_url = "https://pachuca.com.mx/" + negocios.getLogo();
 
                 conexionWebServiceLogoUrl(logo_url);
 
@@ -292,7 +292,7 @@ public class FragmentConsultarNegocio extends Fragment {
         }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Ocurrio un error al cargar la imagen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Esperando imagen...", Toast.LENGTH_SHORT).show();
             }
         });
 

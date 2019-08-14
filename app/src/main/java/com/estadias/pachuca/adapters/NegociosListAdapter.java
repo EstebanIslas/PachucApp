@@ -74,7 +74,8 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
     }
 
     private void conexionWSCategorias(String logo, final NegociosHolder negociosHolder) {
-        String URL_imagen = "http://192.168.1.69/PachucaService/api_usuarios/"+logo;
+        //https://pachuca.com.mx/webservice
+        String URL_imagen = "https://pachuca.com.mx/"+logo;
         URL_imagen = URL_imagen.replace(" ", "%20"); //En caso de que exista un espacio
 
         ImageRequest imageRequest = new ImageRequest(URL_imagen, new Response.Listener<Bitmap>() {
@@ -87,7 +88,7 @@ public class NegociosListAdapter extends RecyclerView.Adapter<NegociosListAdapte
         }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Error al cargar la imagen desde el Adapter", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Esperando imagenes...", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -101,7 +101,7 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
         if (registro == true && valida == true && valida_email == true) {
                 /*String URL = "http://2428ffab.ngrok.io/Webservice/api_clientes/wsJSONInsertarCliente.php?nombre=" + edt_nombre_registro_usuario.getText().toString()
                         + "&correo=" + edt_correo_registro_usuario.getText().toString() + "&password=" + save_password;*/
-            String URL= "http://192.168.1.69/PachucaService/api_clientes/wsClientesInsert.php";
+            String URL= "https://pachuca.com.mx/webservice/api_clientes/wsClientesInsert.php";
 
             /*
              * Se implementa la clase volley directa para este metodo POST
@@ -112,7 +112,8 @@ public class ActivityRegistroUsuario extends AppCompatActivity{
 
                 @Override
                 public void onResponse(String response) {
-                    progreso.hide();
+                    progreso.hide
+                            ();
 
                     /*El .trim() es en caso de que exista un espacio en el proceso y se llegue a implementar en la cadena*/
                     if (response.trim().equalsIgnoreCase("Registra")){//Si la respuesta del webservice es igual al registra que imprime el echo del script php

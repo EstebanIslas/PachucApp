@@ -134,7 +134,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
 
     private void totaldeCodigosWebService(String id_promo) {
 
-        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsTotalCodigos.php?id_promo="+id_promo;
+        String URL = "https://pachuca.com.mx/webservice/api_codigos/wsTotalCodigos.php?id_promo="+id_promo;
 
         //jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
@@ -176,7 +176,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
         progreso.setMessage("Cargando...");
         progreso.show();
 
-        String URL = "http://192.168.1.69/PachucaService/api_codigos/wsSeleccionarCodigosUtilizados.php?id_promo="+id_promo;
+        String URL = "https://pachuca.com.mx/webservice/api_codigos/wsSeleccionarCodigosUtilizados.php?id_promo="+id_promo;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null, this, this); //Procesa la informacion del Json
 

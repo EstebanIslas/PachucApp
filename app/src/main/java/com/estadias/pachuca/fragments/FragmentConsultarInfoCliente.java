@@ -127,7 +127,7 @@ public class FragmentConsultarInfoCliente extends Fragment {
         progreso.setMessage("Cargando");
         progreso.show();
 
-        String URL = "http://192.168.1.69/PachucaService/api_clientes/wsSelectOneCliente.php?id_cliente="+ id_cliente;
+        String URL = "https://pachuca.com.mx/webservice/api_clientes/wsSelectOneCliente.php?id_cliente="+ id_cliente;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override

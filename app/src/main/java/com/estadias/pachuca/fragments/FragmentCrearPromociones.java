@@ -154,10 +154,10 @@ public class FragmentCrearPromociones extends Fragment {
 
     private void insertarPromocionesWebService(String id_usuario) {
         progreso = new ProgressDialog(getContext());
-        progreso.setMessage("Creando Promocións...");
+        progreso.setMessage("Creando Promoción...");
         progreso.show();
 
-        String URL = "http://192.168.1.69/PachucaService/api_promociones/wsInsertarPromociones.php?titulo="+ edt_titulo_crear_promociones.getText()
+        String URL = "https://pachuca.com.mx/webservice/api_promociones/wsInsertarPromociones.php?titulo="+ edt_titulo_crear_promociones.getText()
                 +"&descripcion="+edt_descripcion_crear_promociones.getText()+"&id=" + id_usuario;
 
         URL = URL.replace(" ", "%20");
@@ -253,7 +253,7 @@ public class FragmentCrearPromociones extends Fragment {
 
         for (int i=1; i <=total_numeros; i++){
             String random = UUID.randomUUID().toString().toUpperCase().substring(0,6); //Genera cadena de 6 caracteres aleatorios
-            String URL = "http://192.168.1.69/PachucaService/api_codigos/wsInsertarCodigos.php?codigo="+ random +"&id_promo=" + id_promo;
+            String URL = "https://pachuca.com.mx/webservice/api_codigos/wsInsertarCodigos.php?codigo="+ random +"&id_promo=" + id_promo;
 
             //jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL,
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {

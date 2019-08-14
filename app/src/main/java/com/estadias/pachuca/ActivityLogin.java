@@ -85,7 +85,7 @@ public class ActivityLogin extends AppCompatActivity implements Response.Listene
 
         String password = ActivityLogin.md5(edt_password_login.getText().toString());
 
-        String URL = "http://192.168.1.69/PachucaService/api_login/wsLogin.php?correo=" + edt_correo_login.getText().toString() +
+        String URL = "https://pachuca.com.mx/webservice/api_login/wsLogin.php?correo=" + edt_correo_login.getText().toString() +
                 "&password=" + password;
 
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,URL,null,this,this);

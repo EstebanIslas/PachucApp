@@ -201,7 +201,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
 
 
             //Url para metodo POST
-            String URL = "http://192.168.1.69/PachucaService/api_usuarios/wsInsertarUsuarios.php";
+            String URL = "https://pachuca.com.mx/webservice/api_usuarios/wsInsertarUsuarios.php";
 
             Toast.makeText(this, "Esto puede tardar unos minutos", Toast.LENGTH_SHORT).show();
 
@@ -266,7 +266,7 @@ public class ActivityRegistroNegocio extends AppCompatActivity {
                     parametros.put("colonia", colonia);
                     parametros.put("numero", numero);
                     parametros.put("descripcion", descripcion);
-                    parametros.put("telefono1", telefono1);
+                    parametros.put("telefono", telefono1);
                     parametros.put("password", finalSave_password);
                     parametros.put("categoria", CATEGORIA);
                     parametros.put("municipio", municipio);
