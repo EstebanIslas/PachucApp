@@ -157,89 +157,108 @@ public class FragmentCrearPromociones extends Fragment {
         progreso.setMessage("Creando Promoción...");
         progreso.show();
 
-        String URL = "https://pachuca.com.mx/webservice/api_promociones/wsInsertarPromociones.php?titulo="+ edt_titulo_crear_promociones.getText()
-                +"&descripcion="+edt_descripcion_crear_promociones.getText()+"&id=" + id_usuario;
+        boolean valida;
 
-        URL = URL.replace(" ", "%20");
+        if (edt_titulo_crear_promociones.getText().toString().isEmpty() || edt_descripcion_crear_promociones.getText().toString().isEmpty()){
+            valida = false;
+            Toast.makeText(getContext(), "Existen campos vacíos!", Toast.LENGTH_SHORT).show();
+        }else {
+            valida = true;
+        }
 
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                progreso.hide();
+        if (valida == true) {
 
-                //Mapear lo que devuelve el Webservice
-                ModelPromociones promociones = new ModelPromociones();
+            String URL = "https://pachuca.com.mx/webservice/api_promociones/wsInsertarPromociones.php?titulo=" + edt_titulo_crear_promociones.getText()
+                    + "&descripcion=" + edt_descripcion_crear_promociones.getText() + "&id=" + id_usuario;
 
-                JSONArray json = response.optJSONArray("promocion"); //Separa el array que muestra el json -> "[promocion:" <-
+            URL = URL.replace(" ", "%20");
 
-                JSONObject jsonObject = null; //Se encarga de llenar cada objeto dependiendo de lo que tenga la consulta de json
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    progreso.hide();
 
-                try{
-                    jsonObject = json.getJSONObject(0);
+                    //Mapear lo que devuelve el Webservice
+                    ModelPromociones promociones = new ModelPromociones();
 
-                    promociones.setId_promo(jsonObject.optInt("id_promo"));
-                    promociones.setTitulo(jsonObject.optString("titulo"));
-                    promociones.setDescripcion(jsonObject.optString("descripcion"));
-                    promociones.setId(jsonObject.optInt("id"));
+                    JSONArray json = response.optJSONArray("promocion"); //Separa el array que muestra el json -> "[promocion:" <-
 
-                    final String id_promo, titulo, descripcion, id_usuario;//Variables donde se guardara el get del modelo
+                    JSONObject jsonObject = null; //Se encarga de llenar cada objeto dependiendo de lo que tenga la consulta de json
 
-                    id_promo = String.valueOf(promociones.getId_promo());
-                    titulo = String.valueOf(promociones.getTitulo());
-                    descripcion = String.valueOf(promociones.getDescripcion());
-                    id_usuario = String.valueOf(promociones.getId());
+                    try {
+                        jsonObject = json.getJSONObject(0);
 
-                    //Toast.makeText(getContext(), id_promo + " " + titulo + " " + descripcion + " " + id, Toast.LENGTH_SHORT).show();
+                        promociones.setId_promo(jsonObject.optInt("id_promo"));
+                        promociones.setTitulo(jsonObject.optString("titulo"));
+                        promociones.setDescripcion(jsonObject.optString("descripcion"));
+                        promociones.setId(jsonObject.optInt("id"));
 
-                    AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
-                    dialogo1.setTitle("Crear Códigos");
-                    dialogo1.setMessage("¿Deseas crear codigos aleatorios para esta promoción?");
-                    dialogo1.setCancelable(false);
-                    dialogo1.setPositiveButton("Crear", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            tv_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
-                            edt_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
-                            btn_insertar_codigos.setVisibility(View.VISIBLE);
+                        final String id_promo, titulo, descripcion, id_usuario;//Variables donde se guardara el get del modelo
 
-                            edt_titulo_crear_promociones.setEnabled(false);
-                            edt_descripcion_crear_promociones.setEnabled(false);
-                            btn_insertar_promociones.setEnabled(false);
+                        id_promo = String.valueOf(promociones.getId_promo());
+                        titulo = String.valueOf(promociones.getTitulo());
+                        descripcion = String.valueOf(promociones.getDescripcion());
+                        id_usuario = String.valueOf(promociones.getId());
 
-                            btn_insertar_codigos.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    generarCodigosWebService(id_promo);
-                                }
-                            });
-                        }
-                    });
-                    dialogo1.setNegativeButton("No crear", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialogo1, int id) {
-                            Toast.makeText(getContext(), "Promoción creada sin códigos!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    dialogo1.show();
+                        //Toast.makeText(getContext(), id_promo + " " + titulo + " " + descripcion + " " + id, Toast.LENGTH_SHORT).show();
 
-                }catch (JSONException error) {
-                    Toast.makeText(getContext(), "No se obtuvo ninguna promocion creada", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+                        dialogo1.setTitle("Crear Códigos");
+                        dialogo1.setMessage("¿Deseas crear codigos aleatorios para esta promoción?");
+                        dialogo1.setCancelable(false);
+                        dialogo1.setPositiveButton("Crear", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                tv_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
+                                edt_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
+                                btn_insertar_codigos.setVisibility(View.VISIBLE);
+
+                                edt_titulo_crear_promociones.setEnabled(false);
+                                edt_descripcion_crear_promociones.setEnabled(false);
+                                btn_insertar_promociones.setEnabled(false);
+
+                                btn_insertar_codigos.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        generarCodigosWebService(id_promo);
+                                    }
+                                });
+                            }
+                        });
+                        dialogo1.setNegativeButton("No crear", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Toast.makeText(getContext(), "Promoción creada sin códigos!", Toast.LENGTH_SHORT).show();
+                                edt_titulo_crear_promociones.setText("");
+                                edt_descripcion_crear_promociones.setText("");
+                                btn_insertar_promociones.setText("");
+                            }
+                        });
+                        dialogo1.show();
+
+                    } catch (JSONException error) {
+                        Toast.makeText(getContext(), "No se obtuvo ninguna promocion creada", Toast.LENGTH_SHORT).show();
+                        System.out.println();
+                        progreso.hide();
+                        Log.i("ERROR: ", error.toString());
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), "No existe conexion con el servidor", Toast.LENGTH_SHORT).show();
                     System.out.println();
                     progreso.hide();
                     Log.i("ERROR: ", error.toString());
                 }
+            });
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "No existe conexion con el servidor", Toast.LENGTH_SHORT).show();
-                System.out.println();
-                progreso.hide();
-                Log.i("ERROR: ", error.toString());
-            }
-        });
+            request.add(jsonObjectRequest);
 
-        request.add(jsonObjectRequest);
+        }else{
+            Toast.makeText(getContext(), "No se puede crear promoción!!", Toast.LENGTH_SHORT).show();
+            progreso.hide();
+        }
 
     }
 
@@ -249,70 +268,84 @@ public class FragmentCrearPromociones extends Fragment {
         progreso.show();
         progreso.setCancelable(false);
 
-        int total_numeros = Integer.parseInt(edt_numero_codigos_crear_promociones.getText().toString());
+        boolean valida;
 
-        for (int i=1; i <=total_numeros; i++){
-            String random = UUID.randomUUID().toString().toUpperCase().substring(0,6); //Genera cadena de 6 caracteres aleatorios
-            String URL = "https://pachuca.com.mx/webservice/api_codigos/wsInsertarCodigos.php?codigo="+ random +"&id_promo=" + id_promo;
+        if (edt_numero_codigos_crear_promociones.getText().toString().isEmpty()){
+            valida = false;
+            edt_numero_codigos_crear_promociones.setError("Campo vacío");
+        }else {
+            valida= true;
+        }
 
-            //jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL,
-            jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    progreso.hide();
-                    progreso.setCancelable(true);
+        if (valida == true) {
+            int total_numeros = Integer.parseInt(edt_numero_codigos_crear_promociones.getText().toString());
 
-                    ModelCodigos codigos = new ModelCodigos();
+            for (int i = 1; i <= total_numeros; i++) {
+                String random = UUID.randomUUID().toString().toUpperCase().substring(0, 6); //Genera cadena de 6 caracteres aleatorios
+                String URL = "https://pachuca.com.mx/webservice/api_codigos/wsInsertarCodigos.php?codigo=" + random + "&id_promo=" + id_promo;
 
-                    JSONArray json = response.optJSONArray("codigo"); //Separa el array que muestra el json -> "[promocion:" <-
+                //jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL,
+                jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progreso.hide();
+                        progreso.setCancelable(true);
 
-                    JSONObject jsonObject = null; //Se encarga de llenar cada objeto dependiendo de lo que tenga la consulta de json
+                        ModelCodigos codigos = new ModelCodigos();
 
-                    try{
-                        jsonObject = json.getJSONObject(0);
+                        JSONArray json = response.optJSONArray("codigo"); //Separa el array que muestra el json -> "[promocion:" <-
 
-                        codigos.setId_codigo(jsonObject.optInt("id_codigo"));
-                        codigos.setCodigo(jsonObject.optString("codigo"));
-                        codigos.setEstado(jsonObject.optString("estado"));
-                        codigos.setId_promo(jsonObject.optInt("id_promo"));
+                        JSONObject jsonObject = null; //Se encarga de llenar cada objeto dependiendo de lo que tenga la consulta de json
 
-                        String codigo = String.valueOf(codigos.getCodigo());
+                        try {
+                            jsonObject = json.getJSONObject(0);
 
-                        Toast.makeText(getContext(), "Generando códigos " + codigo, Toast.LENGTH_SHORT).show();
+                            codigos.setId_codigo(jsonObject.optInt("id_codigo"));
+                            codigos.setCodigo(jsonObject.optString("codigo"));
+                            codigos.setEstado(jsonObject.optString("estado"));
+                            codigos.setId_promo(jsonObject.optInt("id_promo"));
 
-                        tv_numero_codigos_crear_promociones.setVisibility(View.GONE);
-                        edt_numero_codigos_crear_promociones.setVisibility(View.GONE);
-                        btn_insertar_codigos.setVisibility(View.GONE);
+                            String codigo = String.valueOf(codigos.getCodigo());
 
-                        edt_titulo_crear_promociones.setEnabled(true);
-                        edt_descripcion_crear_promociones.setEnabled(true);
-                        btn_insertar_promociones.setEnabled(true);
+                            Toast.makeText(getContext(), "Generando códigos " + codigo, Toast.LENGTH_SHORT).show();
 
-                        edt_titulo_crear_promociones.setText("");
-                        edt_descripcion_crear_promociones.setText("");
+                            tv_numero_codigos_crear_promociones.setVisibility(View.GONE);
+                            edt_numero_codigos_crear_promociones.setVisibility(View.GONE);
+                            btn_insertar_codigos.setVisibility(View.GONE);
 
-                        tv_numero_codigos_crear_promociones.setText("Códigos generados");
-                        tv_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
+                            edt_titulo_crear_promociones.setEnabled(true);
+                            edt_descripcion_crear_promociones.setEnabled(true);
+                            btn_insertar_promociones.setEnabled(true);
 
-                    }catch (JSONException error) {
-                        Toast.makeText(getContext(), "No se obtuvo ninguna promocion creada", Toast.LENGTH_SHORT).show();
+                            edt_titulo_crear_promociones.setText("");
+                            edt_descripcion_crear_promociones.setText("");
+
+                            tv_numero_codigos_crear_promociones.setText("Códigos generados");
+                            tv_numero_codigos_crear_promociones.setVisibility(View.VISIBLE);
+
+                        } catch (JSONException error) {
+                            Toast.makeText(getContext(), "No se obtuvo ninguna promocion creada", Toast.LENGTH_SHORT).show();
+                            System.out.println();
+                            progreso.hide();
+                            Log.i("ERROR: ", error.toString());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "No se pudo generar los codigos", Toast.LENGTH_SHORT).show();
                         System.out.println();
                         progreso.hide();
+                        progreso.setCancelable(true);
                         Log.i("ERROR: ", error.toString());
                     }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext(), "No se pudo generar los codigos", Toast.LENGTH_SHORT).show();
-                    System.out.println();
-                    progreso.hide();
-                    progreso.setCancelable(true);
-                    Log.i("ERROR: ", error.toString());
-                }
-            });
+                });
 
-            request.add(jsonObjectRequest);
+                request.add(jsonObjectRequest);
+            }
+        }else {
+            Toast.makeText(getContext(), "No se pueden generar los codigos", Toast.LENGTH_SHORT).show();
+            progreso.hide();
         }
 
     }
