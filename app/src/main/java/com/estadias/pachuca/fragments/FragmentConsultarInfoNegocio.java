@@ -203,7 +203,7 @@ public class FragmentConsultarInfoNegocio extends Fragment {
                 tv_dir_completa_consulta_info_neg.setText(direccion);
                 tv_estado_consulta_info_neg.setText(estado);
 
-                if (visibilidad.equals("no visible")){
+                if (visibilidad.equals("0")){
                     tv_visibilidad_texto.setVisibility(View.VISIBLE);
                 }
 
@@ -241,7 +241,7 @@ public class FragmentConsultarInfoNegocio extends Fragment {
         }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Ocurrio un error al cargar la imagen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Esperando imagen...", Toast.LENGTH_SHORT).show();
             }
         });
 
