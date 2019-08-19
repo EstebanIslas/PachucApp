@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="Nombre"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="#000000"
                 android:textSize="19sp"
                 android:layout_marginTop="15sp"/>
 
@@ -140,7 +140,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/botones_estilo"
                     android:fontFamily="@font/mukta_vaani_extralight"
-                    android:text="Enviar Mensaje"
+                    android:text="Enviar WhatsApp"
                     android:gravity="left"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="12sp"
@@ -156,6 +156,18 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     />
+
+                <Button
+                    android:id="@+id/btn_mapa_consulta"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/botones_estilo"
+                    android:fontFamily="@font/mukta_vaani_extralight"
+                    android:text="Ir a Ubicación"
+                    android:gravity="left"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    android:layout_marginTop="10sp"/>
 
                 <TextView
                     android:id="@+id/tv_ubicacion_consulta_neg"

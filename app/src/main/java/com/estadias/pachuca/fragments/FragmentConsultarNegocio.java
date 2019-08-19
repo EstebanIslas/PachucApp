@@ -65,9 +65,10 @@ public class FragmentConsultarNegocio extends Fragment {
     TextView tv_dir_completa_consulta_neg;
     ImageView imv_logo_consulta_neg;
 
-    //Boton de llamada y mensaje
+    //Boton de llamada y mensaje y mapa
     Button btn_llamar;
     Button btn_mensaje;
+    Button btn_mapa;
 
     //Boton de promociones
     Button btn_promociones_consulta_neg;
@@ -123,6 +124,8 @@ public class FragmentConsultarNegocio extends Fragment {
         Bundle bundle = this.getArguments();
         final String id_negocio = bundle.get(FragmentListaNegocios.ID_NEGOCIO).toString();
 
+        tv_ubicacion__consulta_neg.setVisibility(View.GONE);
+
         conexionWebService(id_negocio);
 
         btn_llamar.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +139,13 @@ public class FragmentConsultarNegocio extends Fragment {
             @Override
             public void onClick(View view) {
                 mensajeOnClick(view);
+            }
+        });
+
+        btn_mapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vermapaOnClick(view);
             }
         });
 
@@ -172,11 +182,22 @@ public class FragmentConsultarNegocio extends Fragment {
     }
 
     private void mensajeOnClick(View view) {
-        Uri mensaje = Uri.parse("smsto:"+ tv_telefono_consulta_neg.getText().toString());
+        /*Uri mensaje = Uri.parse("smsto:"+ tv_telefono_consulta_neg.getText().toString());
         Intent smsIntent = new Intent(Intent.ACTION_SENDTO, mensaje);
         smsIntent.putExtra("sms_body", "");
 
-        startActivity(smsIntent);
+        startActivity(smsIntent);*/
+        try{
+            String telefono_consulta = tv_telefono_consulta_neg.getText().toString();
+            String numero = "+521" + telefono_consulta;
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            String uri = "whatsapp://send?phone=" + numero;
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        }catch (Exception ex) {
+            Toast.makeText(getContext(), "Ocurrió un problema con WhatsApp", Toast.LENGTH_SHORT).show();
+            Log.e("\n\nERROR: " , ex.getMessage());
+        }
     }
 
     private void llamarOnClick(View view) {
@@ -184,6 +205,18 @@ public class FragmentConsultarNegocio extends Fragment {
         Intent callIntent = new Intent(Intent.ACTION_DIAL, numero);
 
         startActivity(callIntent);
+    }
+
+    private void vermapaOnClick(View view){
+        try {
+            String ubicacion = tv_ubicacion__consulta_neg.getText().toString();
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(ubicacion));
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            startActivity(intent);
+        }catch (Exception ex){
+            Toast.makeText(getContext(), "Ocurrió un problema con Google Maps", Toast.LENGTH_SHORT).show();
+            Log.e("\n\nERROR: " , ex.getMessage());
+        }
     }
 
     private void initComponents(View view) {
@@ -197,9 +230,10 @@ public class FragmentConsultarNegocio extends Fragment {
 
         tv_dir_completa_consulta_neg = view.findViewById(R.id.tv_dir_completa_consulta_neg);
 
-        //Boton de Llamada y mensaje
+        //Boton de Llamada y mensaje y mapa
         btn_llamar = view.findViewById(R.id.btn_llamar_consulta);
         btn_mensaje = view.findViewById(R.id.btn_mensaje_consulta);
+        btn_mapa = view.findViewById(R.id.btn_mapa_consulta);
 
         //Boton de Promociones
         btn_promociones_consulta_neg = view.findViewById(R.id.btn_promociones_consulta_neg);
