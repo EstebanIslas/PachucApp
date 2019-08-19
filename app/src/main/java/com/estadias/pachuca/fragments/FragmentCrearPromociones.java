@@ -246,7 +246,7 @@ public class FragmentCrearPromociones extends Fragment {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext(), "No existe conexion con el servidor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No se puede crear la promoción, revisa tu conexión o los caracteres que ingresaste", Toast.LENGTH_SHORT).show();
                     System.out.println();
                     progreso.hide();
                     Log.i("ERROR: ", error.toString());
@@ -279,6 +279,8 @@ public class FragmentCrearPromociones extends Fragment {
 
         if (valida == true) {
             int total_numeros = Integer.parseInt(edt_numero_codigos_crear_promociones.getText().toString());
+
+            Toast.makeText(getContext(), "Espera a que se terminen de mostrar todos los códigos para poder realizar otra actividad.", Toast.LENGTH_LONG).show();
 
             for (int i = 1; i <= total_numeros; i++) {
                 String random = UUID.randomUUID().toString().toUpperCase().substring(0, 6); //Genera cadena de 6 caracteres aleatorios
