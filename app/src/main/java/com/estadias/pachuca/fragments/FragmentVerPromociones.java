@@ -205,7 +205,7 @@ public class FragmentVerPromociones extends Fragment implements Response.Listene
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getContext(), "No existe conexion con el Servidor", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Parece que no hay promociones generadas, intentalo en otra ocasión", Toast.LENGTH_SHORT).show();
         System.out.println();
         progreso.hide();
         Log.i("ERROR: ", error.toString());

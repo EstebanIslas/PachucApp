@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.estadias.pachuca.R;
 import com.estadias.pachuca.adapters.CodigosGeneradosAdapter;
@@ -64,13 +66,17 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
     //Permiten establecer la conexion con el webservice
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
-
+    StringRequest stringRequest;
     private static String ID_PROMO = "";
 
     // Variables finales que se envian a otro fragment
     public static final String CODIGO = "1";
     public static final String USUARIO = "1";
     public static final String ID_PROMOCION = "0";
+
+    //Variables para eliminar las promociones.
+    private static String RESULT_RV = " "; // Para saber si la consulta del recycler esta vacia
+    Button btn_eliminar_promociones;
 
 
 
@@ -118,6 +124,8 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
         id_recycler_ver_codigos_canjeados.setLayoutManager(new LinearLayoutManager(this.getContext()));
         id_recycler_ver_codigos_canjeados.setHasFixedSize(true); //Parametros para linear layout
 
+        btn_eliminar_promociones = view.findViewById(R.id.btn_eliminar_promocion);
+
         request = Volley.newRequestQueue(getContext()); //Referenciar
 
         //Envio de parametro del otro fragment ListaCategorias
@@ -129,7 +137,110 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
 
         listaCodigosWebService(id_promo);
 
+        btn_eliminar_promociones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (RESULT_RV == "1"){ //Si el recycler esta vacio solo eliminara los codigos y la promocion porque no hay cliente_codigo
+                    eliminarCodigosWebService(ID_PROMO);
+                }else if (RESULT_RV == "0"){
+                    eliminarClienteCodigoWebService(ID_PROMO);
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void eliminarClienteCodigoWebService(String id_promo) {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Eliminando Códigos Generados por los clientes...");
+        progreso.show();
+
+        String URL = "https://pachuca.com.mx/webservice/api_promociones/wsEliminarClienteCodigo.php?id_promo="+id_promo;
+
+        stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progreso.hide();
+
+                if (response.trim().equalsIgnoreCase("elimina")){
+                    Toast.makeText(getContext(), "Códigos Generados por los clientes eliminados!!!", Toast.LENGTH_SHORT).show();
+                    eliminarCodigosWebService(ID_PROMO);
+                }else {
+                    Toast.makeText(getContext(), "Ocurrió un problema al eliminar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.hide();
+                Toast.makeText(getContext(), "Ocurrio un problema al eliminar los codigos generados, intentelo en otra ocasión" +error.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("Error",error.toString());
+            }
+        });
+        request.add(stringRequest);
+    }
+
+    private void eliminarCodigosWebService(String id_promo) {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Eliminando Códigos...");
+        progreso.show();
+
+        String URL = "https://pachuca.com.mx/webservice/api_promociones/wsEliminarCodigos.php?id_promo="+id_promo;
+
+        stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progreso.hide();
+
+                if (response.trim().equalsIgnoreCase("elimina")){
+                    Toast.makeText(getContext(), "Códigos Eliminados!!", Toast.LENGTH_SHORT).show();
+                    eliminarPromocionWebService(ID_PROMO);
+                } else {
+                    Toast.makeText(getContext(), "Ocurrió un problema al eliminar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.hide();
+                Toast.makeText(getContext(), "Ocurrio un problema al eliminar los codigos, intentelo en otra ocasión" +error.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("Error",error.toString());
+            }
+        });
+        request.add(stringRequest);
+    }
+
+    private void eliminarPromocionWebService(String id_promo) {
+        progreso = new ProgressDialog(getContext());
+        progreso.setMessage("Eliminando Promoción...");
+        progreso.show();
+
+        String URL = "https://pachuca.com.mx/webservice/api_promociones/wsEliminarPromociones.php?id_promo="+id_promo;
+
+        stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progreso.hide();
+
+                if (response.trim().equalsIgnoreCase("elimina")){
+                    Toast.makeText(getContext(), "Promoción Eliminada!!", Toast.LENGTH_SHORT).show();
+                    totaldeCodigosWebService(ID_PROMO);
+                    listaCodigosWebService(ID_PROMO);
+                    btn_eliminar_promociones.setEnabled(false);
+                } else {
+                    Toast.makeText(getContext(), "Ocurrió un problema al eliminar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.hide();
+                Toast.makeText(getContext(), "Ocurrio al eliminar la promocion, intentelo en otra ocasión" +error.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("Error",error.toString());
+            }
+        });
+        request.add(stringRequest);
     }
 
     private void totaldeCodigosWebService(String id_promo) {
@@ -242,7 +353,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
 
                 }
             });
-
+            RESULT_RV = "0";// Significa que el recycler esta vacio
             id_recycler_ver_codigos_canjeados.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -257,6 +368,7 @@ public class FragmentVerCodigos extends Fragment implements Response.Listener<JS
         System.out.println();
         progreso.hide();
         Log.i("ERROR: ", error.toString());
+        RESULT_RV = "1";// Significa que el recycler esta vacio
     }
 
 
